@@ -1,0 +1,662 @@
+// מטפסים בסולם | نتسلّق السُلّم — canonical bilingual knowledge base.
+//
+// Design rules (see docs/ARCHITECTURE.md):
+//  * One canonical milestone/activity structure; languages live in *_translations.
+//  * The PDFs are authoritative for educational text; the Excel workbook is
+//    authoritative for video mappings. Every mapping keeps its sheet + row.
+//  * Nothing is matched by AI at import time without a stored method/confidence.
+//  * pgvector / full-text indexes that Prisma cannot express are created in the
+//    `search_indexes` migration (raw SQL).
+
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// ---------------------------------------------------------------- enums ----
+
+enum SourceType {
+  PDF
+  XLSX
+}
+
+enum DocumentLanguage {
+  he
+  ar
+  multilingual
+}
+
+enum ContentLanguage {
+  he
+  ar
+}
+
+enum VideoLanguage {
+  he
+  ar
+  unknown
+}
+
+enum RecordStatus {
+  active
+  draft
+  archived
+}
+
+enum ReviewStatus {
+  unreviewed
+  needs_review
+  approved
+  rejected
+}
+
+enum ExtractionStatus {
+  complete
+  partial
+  failed
+  manual
+}
+
+/// Excel sub-milestone (video unit) vs. exercise bullet from a handbook.
+enum ActivityType {
+  video_segment
+  handbook_exercise
+}
+
+/// Role of a segment/exercise inside its milestone.
+enum ActivityRole {
+  overview
+  exercise
+  parent_guidance
+  note
+}
+
+enum Audience {
+  educator
+  parent
+  both
+  unknown
+}
+
+/// Relationship types required by the spec. Used both for video mappings and for
+/// links between Excel video segments and handbook exercises.
+enum RelationshipType {
+  exact_activity
+  milestone_overview
+  parent_guidance
+  supporting_instruction
+  requires_review
+}
+
+enum ConfidenceStatus {
+  verified         // cross-validated against independent source fields
+  source_asserted  // stated by the source, not independently cross-checked
+  needs_review
+  conflict
+}
+
+enum AvailabilityStatus {
+  unchecked
+  available
+  unavailable
+  error
+}
+
+enum ImportJobType {
+  video_workbook
+  pdf_handbook
+}
+
+enum ImportStatus {
+  queued
+  parsing
+  staged
+  validated
+  publishing
+  published
+  failed
+  cancelled
+}
+
+enum IssueSeverity {
+  info
+  warning
+  error
+  critical
+}
+
+enum RowStatus {
+  valid
+  invalid
+  duplicate
+  skipped
+}
+
+enum RowAction {
+  insert
+  update
+  unchanged
+  conflict
+  none
+}
+
+enum UserRole {
+  admin
+  editor
+  viewer
+}
+
+enum MessageRole {
+  user
+  assistant
+}
+
+enum BookmarkType {
+  milestone
+  activity
+  video
+}
+
+// ------------------------------------------------------- source provenance --
+
+model SourceDocument {
+  id               String           @id @default(uuid()) @db.Uuid
+  documentKey      String           @unique @map("document_key")
+  title            String
+  sourceType       SourceType       @map("source_type")
+  language         DocumentLanguage
+  originalFilename String           @map("original_filename")
+  storagePath      String           @map("storage_path")
+  checksum         String
+  currentVersionId String?          @unique @map("current_version_id") @db.Uuid
+  createdAt        DateTime         @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt        DateTime         @updatedAt @map("updated_at") @db.Timestamptz(6)
+
+  currentVersion SourceVersion?        @relation("CurrentVersion", fields: [currentVersionId], references: [id])
+  versions       SourceVersion[]       @relation("DocumentVersions")
+  mappings       ActivityVideoMapping[]
+  importJobs     ImportJob[]
+  importIssues   ImportIssue[]
+
+  @@map("source_documents")
+}
+
+model SourceVersion {
+  id               String       @id @default(uuid()) @db.Uuid
+  sourceDocumentId String       @map("source_document_id") @db.Uuid
+  versionNumber    Int          @map("version_number")
+  checksum         String
+  importedAt       DateTime     @default(now()) @map("imported_at") @db.Timestamptz(6)
+  importStatus     ImportStatus @map("import_status")
+  pageCount        Int?         @map("page_count")
+  metadata         Json         @default("{}")
+
+  document              SourceDocument         @relation("DocumentVersions", fields: [sourceDocumentId], references: [id])
+  currentOf             SourceDocument?        @relation("CurrentVersion")
+  milestoneTranslations MilestoneTranslation[]
+  activityTranslations  ActivityTranslation[]
+  mappings              ActivityVideoMapping[]
+  references            SourceReference[]
+  chunks                KnowledgeChunk[]
+  importJobs            ImportJob[]
+
+  @@unique([sourceDocumentId, versionNumber])
+  @@unique([sourceDocumentId, checksum])
+  @@map("source_versions")
+}
+
+// ------------------------------------------------------------- age groups --
+
+model AgeGroup {
+  id            String  @id @default(uuid()) @db.Uuid
+  code          String  @unique
+  /// Normalised bounds in months (decimal: 6 weeks = 1.380 months).
+  minAgeMonths  Decimal @map("min_age_months") @db.Decimal(6, 3)
+  maxAgeMonths  Decimal @map("max_age_months") @db.Decimal(6, 3)
+  /// Exact lower bound when the source states it in weeks (chapter 1: 6 weeks).
+  minAgeWeeks   Int?    @map("min_age_weeks")
+  displayOrder  Int     @map("display_order")
+  labelHe       String  @map("label_he")
+  labelAr       String  @map("label_ar")
+  /// Original wording from each handbook's chapter page, unmodified.
+  sourceTextHe  String? @map("source_text_he")
+  sourceTextAr  String? @map("source_text_ar")
+  chapterNumber Int     @unique @map("chapter_number")
+
+  milestones Milestone[]
+
+  @@map("age_groups")
+}
+
+// ------------------------------------------------------------- milestones --
+
+model Milestone {
+  id                String       @id @default(uuid()) @db.Uuid
+  milestoneCode     String       @unique @map("milestone_code")
+  ageGroupId        String       @map("age_group_id") @db.Uuid
+  developmentDomain String?      @map("development_domain")
+  displayOrder      Int          @map("display_order")
+  status            RecordStatus @default(active)
+  createdAt         DateTime     @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt         DateTime     @updatedAt @map("updated_at") @db.Timestamptz(6)
+
+  ageGroup     AgeGroup               @relation(fields: [ageGroupId], references: [id])
+  translations MilestoneTranslation[]
+  activities   Activity[]
+  mappings     ActivityVideoMapping[]
+  references   SourceReference[]
+  chunks       KnowledgeChunk[]
+
+  @@index([ageGroupId])
+  @@index([developmentDomain])
+  @@map("milestones")
+}
+
+model MilestoneTranslation {
+  id                       String          @id @default(uuid()) @db.Uuid
+  milestoneId              String          @map("milestone_id") @db.Uuid
+  language                 ContentLanguage
+  title                    String
+  summary                  String?
+  developmentalExplanation String?         @map("developmental_explanation")
+  expectedAgeText          String?         @map("expected_age_text")
+  educationalGuidance      String?         @map("educational_guidance")
+  additionalNotes          String?         @map("additional_notes")
+  /// Raw age wording from the source (badge text / Excel cell), never normalised.
+  sourceAgeText            String?         @map("source_age_text")
+  /// 'pdf' translations are authoritative for display; 'excel' are alternates.
+  sourceOrigin             String          @map("source_origin")
+  isPrimary                Boolean         @default(false) @map("is_primary")
+  sourceVersionId          String          @map("source_version_id") @db.Uuid
+  contentReviewStatus      ReviewStatus    @default(unreviewed) @map("content_review_status")
+  createdAt                DateTime        @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt                DateTime        @updatedAt @map("updated_at") @db.Timestamptz(6)
+
+  milestone     Milestone     @relation(fields: [milestoneId], references: [id], onDelete: Cascade)
+  sourceVersion SourceVersion @relation(fields: [sourceVersionId], references: [id])
+
+  @@unique([milestoneId, language, sourceVersionId])
+  @@index([language, isPrimary])
+  @@map("milestone_translations")
+}
+
+// ---------------------------------------------- sub-milestones & activities --
+
+model Activity {
+  id             String       @id @default(uuid()) @db.Uuid
+  milestoneId    String       @map("milestone_id") @db.Uuid
+  /// '1.1.3' for Excel sub-milestones; '1.1-E2' for handbook exercise #2.
+  activityCode   String       @unique @map("activity_code")
+  sequenceNumber Int          @map("sequence_number")
+  activityType   ActivityType @map("activity_type")
+  role           ActivityRole @default(exercise)
+  audience       Audience     @default(unknown)
+  status         RecordStatus @default(active)
+  /// Raw source attributes (audience text, age text, column-E correlation ...).
+  sourceAttributes Json       @default("{}") @map("source_attributes")
+  createdAt      DateTime     @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt      DateTime     @updatedAt @map("updated_at") @db.Timestamptz(6)
+
+  milestone    Milestone              @relation(fields: [milestoneId], references: [id], onDelete: Cascade)
+  translations ActivityTranslation[]
+  mappings     ActivityVideoMapping[]
+  references   SourceReference[]
+  chunks       KnowledgeChunk[]
+  linksFrom    ActivityLink[]         @relation("LinkSegment")
+  linksTo      ActivityLink[]         @relation("LinkExercise")
+
+  @@index([milestoneId, activityType, sequenceNumber])
+  @@index([audience])
+  @@map("activities")
+}
+
+model ActivityTranslation {
+  id                 String          @id @default(uuid()) @db.Uuid
+  activityId         String          @map("activity_id") @db.Uuid
+  language           ContentLanguage
+  title              String
+  description        String?
+  instructions       String?
+  precautions        String?
+  /// 'pdf' | 'excel'
+  sourceOrigin       String          @map("source_origin")
+  sourceVersionId    String          @map("source_version_id") @db.Uuid
+  verificationStatus ReviewStatus    @default(unreviewed) @map("verification_status")
+  createdAt          DateTime        @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt          DateTime        @updatedAt @map("updated_at") @db.Timestamptz(6)
+
+  activity      Activity      @relation(fields: [activityId], references: [id], onDelete: Cascade)
+  sourceVersion SourceVersion @relation(fields: [sourceVersionId], references: [id])
+
+  @@unique([activityId, language, sourceVersionId])
+  @@index([language])
+  @@map("activity_translations")
+}
+
+/// How an Excel video segment relates to a handbook exercise. Never assumed 1:1.
+model ActivityLink {
+  id           String           @id @default(uuid()) @db.Uuid
+  segmentId    String           @map("segment_id") @db.Uuid
+  exerciseId   String           @map("exercise_id") @db.Uuid
+  linkType     RelationshipType @map("link_type")
+  confidence   ConfidenceStatus
+  /// 'title_similarity' | 'role_rule' | 'manual' ...
+  method       String
+  score        Float?
+  createdAt    DateTime         @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt    DateTime         @updatedAt @map("updated_at") @db.Timestamptz(6)
+
+  segment  Activity @relation("LinkSegment", fields: [segmentId], references: [id], onDelete: Cascade)
+  exercise Activity @relation("LinkExercise", fields: [exerciseId], references: [id], onDelete: Cascade)
+
+  @@unique([segmentId, exerciseId])
+  @@index([exerciseId])
+  @@map("activity_links")
+}
+
+// ------------------------------------------------------------------ videos --
+
+model Video {
+  id                 String             @id @default(uuid()) @db.Uuid
+  provider           String
+  providerVideoId    String             @map("provider_video_id")
+  canonicalUrl       String             @map("canonical_url")
+  embedUrl           String             @map("embed_url")
+  title              String?
+  language           VideoLanguage      @default(unknown)
+  /// Evidence for the language label (sheet names, title prefix, oEmbed title ...).
+  languageEvidence   Json               @default("[]") @map("language_evidence")
+  /// How the language was established: verified (YouTube speech recognition of the audio agrees),
+  /// source_metadata (declared by the workbook, not yet checked), conflict (audio language differs),
+  /// unverified. Only verified / source_metadata videos are shown, and only in their own language.
+  languageStatus     String             @default("source_metadata") @map("language_status")
+  /// Spoken language detected by YouTube's automatic captions (ISO 639-1, e.g. "he", "ar").
+  detectedLanguage   String?            @map("detected_language")
+  videoType          String             @default("instructional") @map("video_type")
+  availabilityStatus AvailabilityStatus @default(unchecked) @map("availability_status")
+  providerTitle      String?            @map("provider_title")
+  lastCheckedAt      DateTime?          @map("last_checked_at") @db.Timestamptz(6)
+  createdAt          DateTime           @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt          DateTime           @updatedAt @map("updated_at") @db.Timestamptz(6)
+
+  mappings ActivityVideoMapping[]
+
+  @@unique([provider, providerVideoId])
+  @@index([language])
+  @@index([language, languageStatus], map: "videos_language_status_idx")
+  @@map("videos")
+}
+
+model ActivityVideoMapping {
+  id                   String           @id @default(uuid()) @db.Uuid
+  /// Deterministic idempotency key: `${language}:${activityCode ?? milestoneCode}:${videoId}`.
+  mappingKey           String           @unique @map("mapping_key")
+  milestoneId          String           @map("milestone_id") @db.Uuid
+  activityId           String?          @map("activity_id") @db.Uuid
+  videoId              String           @map("video_id") @db.Uuid
+  language             VideoLanguage
+  mappingType          RelationshipType @map("mapping_type")
+  sourceDocumentId     String           @map("source_document_id") @db.Uuid
+  sourceVersionId      String           @map("source_version_id") @db.Uuid
+  sourceSheet          String           @map("source_sheet")
+  sourceRowNumber      Int              @map("source_row_number")
+  rawMilestoneCode     String?          @map("raw_milestone_code")
+  rawSubMilestoneCode  String?          @map("raw_sub_milestone_code")
+  rawCorrelationText   String?          @map("raw_correlation_text")
+  rawVideoValue        String?          @map("raw_video_value")
+  confidenceStatus     ConfidenceStatus @map("confidence_status")
+  /// Intended viewers of this video version (educator / parent), from the workbook column.
+  audience             Audience         @default(unknown)
+  validationNotes      Json             @default("[]") @map("validation_notes")
+  isActive             Boolean          @default(true) @map("is_active")
+  createdAt            DateTime         @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt            DateTime         @updatedAt @map("updated_at") @db.Timestamptz(6)
+
+  milestone      Milestone      @relation(fields: [milestoneId], references: [id])
+  activity       Activity?      @relation(fields: [activityId], references: [id])
+  video          Video          @relation(fields: [videoId], references: [id])
+  sourceDocument SourceDocument @relation(fields: [sourceDocumentId], references: [id])
+  sourceVersion  SourceVersion  @relation(fields: [sourceVersionId], references: [id])
+
+  @@index([milestoneId, language, isActive])
+  @@index([activityId, language, isActive])
+  @@index([videoId])
+  @@index([sourceDocumentId, sourceSheet, sourceRowNumber])
+  @@map("activity_video_mappings")
+}
+
+// -------------------------------------------------------- PDF references --
+
+model SourceReference {
+  id                String           @id @default(uuid()) @db.Uuid
+  sourceVersionId   String           @map("source_version_id") @db.Uuid
+  milestoneId       String           @map("milestone_id") @db.Uuid
+  activityId        String?          @map("activity_id") @db.Uuid
+  language          ContentLanguage
+  /// 0-based index into the PDF file (what a viewer's #page= needs is index+1).
+  pdfPageIndex      Int              @map("pdf_page_index")
+  printedPageNumber Int?             @map("printed_page_number")
+  sectionHeading    String?          @map("section_heading")
+  sourceExcerpt     String?          @map("source_excerpt")
+  extractionStatus  ExtractionStatus @map("extraction_status")
+  createdAt         DateTime         @default(now()) @map("created_at") @db.Timestamptz(6)
+
+  sourceVersion SourceVersion @relation(fields: [sourceVersionId], references: [id])
+  milestone     Milestone     @relation(fields: [milestoneId], references: [id], onDelete: Cascade)
+  activity      Activity?     @relation(fields: [activityId], references: [id], onDelete: Cascade)
+
+  @@index([milestoneId, language])
+  @@index([activityId])
+  @@map("source_references")
+}
+
+// ------------------------------------------------------- retrieval chunks --
+
+model KnowledgeChunk {
+  id              String                       @id @default(uuid()) @db.Uuid
+  sourceVersionId String                       @map("source_version_id") @db.Uuid
+  milestoneId     String                       @map("milestone_id") @db.Uuid
+  activityId      String?                      @map("activity_id") @db.Uuid
+  language        ContentLanguage
+  /// milestone_intro | milestone_when | milestone_guidance | exercise | video_segment | note
+  chunkType       String                       @map("chunk_type")
+  textContent     String                       @map("text_content")
+  contentHash     String                       @map("content_hash")
+  embedding       Unsupported("vector(384)")?
+  embeddingModel  String?                      @map("embedding_model")
+  metadata        Json                         @default("{}")
+  createdAt       DateTime                     @default(now()) @map("created_at") @db.Timestamptz(6)
+
+  sourceVersion SourceVersion @relation(fields: [sourceVersionId], references: [id])
+  milestone     Milestone     @relation(fields: [milestoneId], references: [id], onDelete: Cascade)
+  activity      Activity?     @relation(fields: [activityId], references: [id], onDelete: Cascade)
+
+  @@unique([sourceVersionId, contentHash])
+  @@index([milestoneId, language])
+  @@index([language, chunkType])
+  @@map("knowledge_chunks")
+}
+
+// ------------------------------------------------------------------ imports --
+
+model ImportJob {
+  id               String        @id @default(uuid()) @db.Uuid
+  jobType          ImportJobType @map("job_type")
+  status           ImportStatus  @default(queued)
+  language         VideoLanguage?
+  sourceDocumentId String?       @map("source_document_id") @db.Uuid
+  sourceVersionId  String?       @map("source_version_id") @db.Uuid
+  originalFilename String        @map("original_filename")
+  storagePath      String        @map("storage_path")
+  checksum         String
+  mappingProfile   Json?         @map("mapping_profile")
+  stats            Json          @default("{}")
+  errorMessage     String?       @map("error_message")
+  createdById      String?       @map("created_by_id") @db.Uuid
+  publishedById    String?       @map("published_by_id") @db.Uuid
+  createdAt        DateTime      @default(now()) @map("created_at") @db.Timestamptz(6)
+  startedAt        DateTime?     @map("started_at") @db.Timestamptz(6)
+  finishedAt       DateTime?     @map("finished_at") @db.Timestamptz(6)
+
+  sourceDocument SourceDocument?   @relation(fields: [sourceDocumentId], references: [id])
+  sourceVersion  SourceVersion?    @relation(fields: [sourceVersionId], references: [id])
+  createdBy      User?             @relation("JobCreatedBy", fields: [createdById], references: [id])
+  publishedBy    User?             @relation("JobPublishedBy", fields: [publishedById], references: [id])
+  issues         ImportIssue[]
+  rows           ImportRowRecord[]
+
+  @@index([status, createdAt])
+  @@map("import_jobs")
+}
+
+model ImportIssue {
+  id               String        @id @default(uuid()) @db.Uuid
+  importJobId      String?       @map("import_job_id") @db.Uuid
+  sourceDocumentId String?       @map("source_document_id") @db.Uuid
+  sourceFile       String        @map("source_file")
+  worksheet        String?
+  rowNumber        Int?          @map("row_number")
+  pageIndex        Int?          @map("page_index")
+  severity         IssueSeverity
+  code             String
+  message          String
+  details          Json          @default("{}")
+  isResolved       Boolean       @default(false) @map("is_resolved")
+  resolvedById     String?       @map("resolved_by_id") @db.Uuid
+  resolvedAt       DateTime?     @map("resolved_at") @db.Timestamptz(6)
+  resolutionNote   String?       @map("resolution_note")
+  createdAt        DateTime      @default(now()) @map("created_at") @db.Timestamptz(6)
+
+  importJob      ImportJob?      @relation(fields: [importJobId], references: [id], onDelete: Cascade)
+  sourceDocument SourceDocument? @relation(fields: [sourceDocumentId], references: [id])
+  resolvedBy     User?           @relation(fields: [resolvedById], references: [id])
+
+  @@index([importJobId, severity])
+  @@index([isResolved, severity])
+  @@map("import_issues")
+}
+
+/// Staging: one record per parsed source row, kept for audit after publication.
+model ImportRowRecord {
+  id            String    @id @default(uuid()) @db.Uuid
+  importJobId   String    @map("import_job_id") @db.Uuid
+  worksheet     String
+  rowNumber     Int       @map("row_number")
+  raw           Json
+  normalized    Json?
+  status        RowStatus
+  action        RowAction @default(none)
+  targetKey     String?   @map("target_key")
+  messages      Json      @default("[]")
+  createdAt     DateTime  @default(now()) @map("created_at") @db.Timestamptz(6)
+
+  importJob ImportJob @relation(fields: [importJobId], references: [id], onDelete: Cascade)
+
+  @@unique([importJobId, worksheet, rowNumber])
+  @@map("import_row_records")
+}
+
+// --------------------------------------------------------- users & usage --
+
+model User {
+  id           String    @id @default(uuid()) @db.Uuid
+  email        String    @unique
+  displayName  String?   @map("display_name")
+  passwordHash String    @map("password_hash")
+  role         UserRole  @default(viewer)
+  isActive     Boolean   @default(true) @map("is_active")
+  lastLoginAt  DateTime? @map("last_login_at") @db.Timestamptz(6)
+  createdAt    DateTime  @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt    DateTime  @updatedAt @map("updated_at") @db.Timestamptz(6)
+
+  auditEntries   AdminAuditLog[]
+  jobsCreated    ImportJob[]     @relation("JobCreatedBy")
+  jobsPublished  ImportJob[]     @relation("JobPublishedBy")
+  issuesResolved ImportIssue[]
+
+  @@map("users")
+}
+
+/// Educators are anonymous: `clientId` is a random id stored in a cookie.
+/// No names or child-identifying fields exist anywhere in the schema.
+model Conversation {
+  id        String          @id @default(uuid()) @db.Uuid
+  clientId  String          @map("client_id")
+  language  ContentLanguage
+  createdAt DateTime        @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt DateTime        @updatedAt @map("updated_at") @db.Timestamptz(6)
+
+  messages Message[]
+
+  @@index([clientId, updatedAt])
+  @@map("conversations")
+}
+
+model Message {
+  id             String      @id @default(uuid()) @db.Uuid
+  conversationId String      @map("conversation_id") @db.Uuid
+  role           MessageRole
+  content        String
+  /// Structured answer (milestones, activities, video ids, citations, grounding).
+  payload        Json?
+  createdAt      DateTime    @default(now()) @map("created_at") @db.Timestamptz(6)
+
+  conversation Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+
+  @@index([conversationId, createdAt])
+  @@map("messages")
+}
+
+model Bookmark {
+  id         String       @id @default(uuid()) @db.Uuid
+  clientId   String       @map("client_id")
+  itemType   BookmarkType @map("item_type")
+  /// milestone_code | activity_code | `${provider}:${video_id}`
+  itemKey    String       @map("item_key")
+  createdAt  DateTime     @default(now()) @map("created_at") @db.Timestamptz(6)
+
+  @@unique([clientId, itemType, itemKey])
+  @@map("bookmarks")
+}
+
+model AdminAuditLog {
+  id         String   @id @default(uuid()) @db.Uuid
+  actorId    String?  @map("actor_id") @db.Uuid
+  action     String
+  entityType String   @map("entity_type")
+  entityId   String?  @map("entity_id")
+  before     Json?
+  after      Json?
+  reason     String?
+  createdAt  DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
+
+  actor User? @relation(fields: [actorId], references: [id])
+
+  @@index([entityType, entityId])
+  @@index([createdAt])
+  @@map("admin_audit_log")
+}
+
+model ApplicationSetting {
+  key         String   @id
+  value       Json
+  description String?
+  updatedAt   DateTime @updatedAt @map("updated_at") @db.Timestamptz(6)
+
+  @@map("application_settings")
+}
+
+/// Fixed-window rate-limit counters shared by all web instances (RATE_LIMIT_STORE=postgres).
+model RateLimitCounter {
+  key         String
+  windowStart DateTime @map("window_start") @db.Timestamptz(6)
+  count       Int      @default(0)
+
+  @@id([key, windowStart])
+  @@index([windowStart])
+  @@map("rate_limit_counters")
+}

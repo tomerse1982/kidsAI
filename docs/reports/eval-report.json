@@ -1,0 +1,1966 @@
+{
+  "summary": {
+    "generatedAt": "2026-10-13T19:21:22.132Z",
+    "answerMode": "extractive (no LLM)",
+    "cases": 51,
+    "errors": 0,
+    "milestoneTop1": 95.1,
+    "milestoneTop3": 100,
+    "byLanguage": {
+      "he": {
+        "top1": 96.6,
+        "n": 29
+      },
+      "ar": {
+        "top1": 91.7,
+        "n": 12
+      }
+    },
+    "byType": {
+      "broad": 80,
+      "specific": 96.9,
+      "video": 100,
+      "cross_language": 100
+    },
+    "nearDomainRefused": 100,
+    "answerLanguageCorrect": 100,
+    "offTopicCorrect": 100,
+    "inScopeAnswered": 95.1,
+    "videoSegmentHit": 100,
+    "allVideosFromMapping": true,
+    "citationLanguageCorrect": 100
+  },
+  "results": [
+    {
+      "id": "he-01",
+      "lang": "he",
+      "type": "broad",
+      "question": "איך לעודד תינוק לעקוב במבט אחרי חפצים?",
+      "expected": [
+        "1.1",
+        "2.1"
+      ],
+      "retrieved": "2.1",
+      "top3": [
+        "2.1",
+        "1.1",
+        "3.1"
+      ],
+      "milestoneTop1": true,
+      "milestoneTop3": true,
+      "notCoveredCorrect": true,
+      "activities": [
+        "2.1-E6",
+        "2.1-E7",
+        "2.1-E5"
+      ],
+      "videos": [
+        "2.1.4:hck-0i9EgeI:he/educator",
+        "2.1.4:yZ9b8fNpgPQ:he/parent",
+        "2.1.8:a9mqBoB7cQY:he/educator",
+        "2.1.8:23Y6WWdgQz8:he/parent"
+      ],
+      "expectedVideoSegment": null,
+      "videoSegmentHit": null,
+      "videosAllMapped": true,
+      "citation": "handbook-he p.18",
+      "citationLanguageCorrect": true,
+      "grounded": "extractive",
+      "topSimilarity": 0.8998,
+      "coverage": 0.75,
+      "answerLanguageCorrect": true,
+      "ms": 2948,
+      "error": null
+    },
+    {
+      "id": "he-02",
+      "lang": "he",
+      "type": "specific",
+      "question": "התינוק לא מגיב לקולות, איך אפשר לעודד תגובה לקול אדם?",
+      "expected": [
+        "1.2",
+        "2.2"
+      ],
+      "retrieved": "1.2",
+      "top3": [
+        "1.2",
+        "2.2",
+        "2.3"
+      ],
+      "milestoneTop1": true,
+      "milestoneTop3": true,
+      "notCoveredCorrect": true,
+      "activities": [
+        "1.2-E7",
+        "1.2-E1",
+        "1.2-E6"
+      ],
+      "videos": [
+        "1.2.7:ti_D8_ACSfA:he/educator",
+        "1.2.7:-Eq59s5MrmU:he/parent",
+        "1.2.1:DE0VdL6LJHA:he/educator",
+        "1.2.1:jyjJt-BZdEY:he/parent"
+      ],
+      "expectedVideoSegment": null,
+      "videoSegmentHit": null,
+      "videosAllMapped": true,
+      "citation": "handbook-he p.10",
+      "citationLanguageCorrect": true,
+      "grounded": "extractive",
+      "topSimilarity": 0.9106,
+      "coverage": 0.71,
+      "answerLanguageCorrect": true,
+      "ms": 211,
+      "error": null
+    },
+    {
+      "id": "he-03",
+      "lang": "he",
+      "type": "specific",
+      "question": "איך לעודד חיוך חברתי אצל תינוק בן חודשיים?",
+      "expected": [
+        "1.3"
+      ],
+      "retrieved": "1.3",
+      "top3": [
+        "1.3",
+        "6.6",
+        "6.4"
+      ],
+      "milestoneTop1": true,
+      "milestoneTop3": true,
+      "notCoveredCorrect": true,
+      "activities": [
+        "1.3-E2",
+        "1.3-E3",
+        "1.3-E7"
+      ],
+      "videos": [
+        "1.3.1:nz7mK-qO_5s:he/educator",
+        "1.3.1:ZbldPhqRl94:he/parent",
+        "1.3.3:YzRqf3RjVXo:he/educator",
+        "1.3.3:fJ0MCuXm884:he/parent"
+      ],
+      "expectedVideoSegment": null,
+      "videoSegmentHit": null,
+      "videosAllMapped": true,
+      "citation": "handbook-he p.12",
+      "citationLanguageCorrect": true,
+      "grounded": "extractive",
+      "topSimilarity": 0.9109,
+      "coverage": 0.6,
+      "answerLanguageCorrect": true,
+      "ms": 151,
+      "error": null
+    },
+    {
+      "id": "he-04",
+      "lang": "he",
+      "type": "specific",
+      "question": "תינוק בן חודש וחצי מתקשה להרים את הראש בשכיבה על הבטן",
+      "expected": [
+        "1.4",
+        "2.7"
+      ],
+      "retrieved": "1.4",
+      "top3": [
+        "1.4",
+        "2.7",
+        "3.4"
+      ],
+      "milestoneTop1": true,
+      "milestoneTop3": true,
+      "notCoveredCorrect": true,
+      "activities": [
+        "1.4-E3",
+        "1.4-E9",
+        "1.4-E4"
+      ],
+      "videos": [
+        "1.4.4:BNi8TQRkRds:he/educator",
+        "1.4.4:OC_TQbdAW7s:he/parent",
+        "1.4.10:RExnpvLZFls:he/educator",
+        "1.4.10:uURoNZPikR8:he/parent"
+      ],
+      "expectedVideoSegment": null,
+      "videoSegmentHit": null,
+      "videosAllMapped": true,
+      "citation": "handbook-he p.14",
+      "citationLanguageCorrect": true,
+      "grounded": "extractive",
+      "topSimilarity": 0.9088,
+      "coverage": 0.71,
+      "answerLanguageCorrect": true,
+      "ms": 124,
+      "error": null
+    },
+    {
+      "id": "he-05",
+      "lang": "he",
+      "type": "specific",
+      "question": "פעילויות להבאת הידיים לקו האמצע ושילוב אצבעות",
+      "expected": [
+        "2.5"
+      ],
+      "retrieved": "2.5",
+      "top3": [
+        "2.5",
+        "3.1",
+        "7.7"
+      ],
+      "milestoneTop1": true,
+      "milestoneTop3": true,
+      "notCoveredCorrect": true,
+      "activities": [
+        "2.5-E7",
+        "2.5-E2",
+        "2.5-E3"
+      ],
+      "videos": [
+        "2.5.1:o_PHE6bfic0:he/educator",
+        "2.5.1:QvXZ8XqSw30:he/parent",
+        "2.5.3:mITCt3Vwwzc:he/educator",
+        "2.5.3:H8GCEfCEDPQ:he/parent"
+      ],
+      "expectedVideoSegment": null,
+      "videoSegmentHit": null,
+      "videosAllMapped": true,
+      "citation": "handbook-he p.26",
+      "citationLanguageCorrect": true,
+      "grounded": "extractive",
+      "topSimilarity": 0.9099,
+      "coverage": 0.86,
+      "answerLanguageCorrect": true,
+      "ms": 110,
+      "error": null
+    },
+    {
+      "id": "he-06",
+      "lang": "he",
+      "type": "specific",
+      "question": "איך לעודד תינוק לאחוז חפץ ולהושיט יד אליו?",
+      "expected": [
+        "2.6"
+      ],
+      "retrieved": "2.6",
+      "top3": [
+        "2.6",
+        "3.1",
+        "4.1"
+      ],
+      "milestoneTop1": true,
+      "milestoneTop3": true,
+      "notCoveredCorrect": true,
+      "activities": [
+        "2.6-E1",
+        "2.6-E5",
+        "2.6-E7"
+      ],
+      "videos": [
+        "2.6.5:vUiICiMgRK0:he/educator",
+        "2.6.5:VFm-Q060wBQ:he/parent",
+        "2.6.1:6NoDqUBnq5E:he/educator",
+        "2.6.1:Y6cdV_fIA8g:he/parent"
+      ],
+      "expectedVideoSegment": null,
+      "videoSegmentHit": null,
+      "videosAllMapped": true,
+      "citation": "handbook-he p.28",
+      "citationLanguageCorrect": true,
+      "grounded": "extractive",
+      "topSimilarity": 0.9115,
+      "coverage": 0.67,
+      "answerLanguageCorrect": true,
+      "ms": 97,
+      "error": null
+    },
+    {
+      "id": "he-07",
+      "lang": "he",
+      "type": "specific",
+      "question": "תינוק בן 7 חודשים, איך לעודד העברת חפץ מיד ליד?",
+      "expected": [
+        "3.1"
+      ],
+      "retrieved": "3.1",
+      "top3": [
+        "3.1",
+        "2.6",
+        "4.1"
+      ],
+      "milestoneTop1": true,
+      "milestoneTop3": true,
+      "notCoveredCorrect": true,
+      "activities": [
+        "3.1-E4",
+        "3.1-E1",
+        "3.1-E5"
+      ],
+      "videos": [
+        "3.1.2:sKcJBM1Xb98:he/educator",
+        "3.1.2:WJsN8QcCVZQ:he/parent",
+        "3.1.5:bAEBV3lFIGM:he/educator",
+        "3.1.6:u1PH5CyOA5c:he/educator"
+      ],
+      "expectedVideoSegment": null,
+      "videoSegmentHit": null,
+      "videosAllMapped": true,
+      "citation": "handbook-he p.34",
+      "citationLanguageCorrect": true,
+      "grounded": "extractive",
+      "topSimilarity": 0.9132,
+      "coverage": 0.67,
+      "answerLanguageCorrect": true,
+      "ms": 87,
+      "error": null
+    },
+    {
+      "id": "he-08",
+      "lang": "he",
+      "type": "specific",
+      "question": "התינוק נרתע מאנשים זרים ובוכה, מה עושים במעון?",
+      "expected": [
+        "3.3"
+      ],
+      "retrieved": null,
+      "top3": [
+        "3.3",
+        "1.2",
+        "1.3"
+      ],
+      "milestoneTop1": false,
+      "milestoneTop3": true,
+      "notCoveredCorrect": false,
+      "activities": [],
+      "videos": [],
+      "expectedVideoSegment": null,
+      "videoSegmentHit": null,
+      "videosAllMapped": true,
+      "citation": null,
+      "citationLanguageCorrect": true,
+      "grounded": "not_covered",
+      "topSimilarity": 0.8702,
+      "coverage": 0.29,
+      "answerLanguageCorrect": true,
+      "ms": 49,
+      "error": null
+    },
+    {
+      "id": "he-09",
+      "lang": "he",
+      "type": "specific",
+      "question": "איך לעודד התהפכות מהגב לבטן?",
+      "expected": [
+        "3.4"
+      ],
+      "retrieved": "3.4",
+      "top3": [
+        "3.4",
+        "1.4",
+        "6.2"
+      ],
+      "milestoneTop1": true,
+      "milestoneTop3": true,
+      "notCoveredCorrect": true,
+      "activities": [
+        "3.4-E5",
+        "3.4-E2",
+        "3.4-E6"
+      ],
+      "videos": [
+        "3.4.1:PWSkb4cXrCo:he/educator",
+        "3.4.1:MtBhAzKx0iU:he/parent",
+        "3.4.3:_mv4RCe7FsQ:he/educator",
+        "3.4.3:e7_Tak-bvao:he/parent"
+      ],
+      "expectedVideoSegment": null,
+      "videoSegmentHit": null,
+      "videosAllMapped": true,
+      "citation": "handbook-he p.40",
+      "citationLanguageCorrect": true,
+      "grounded": "extractive",
+      "topSimilarity": 0.8904,
+      "coverage": 0.75,
+      "answerLanguageCorrect": true,
+      "ms": 86,
+      "error": null
+    },
+    {
+      "id": "he-10",
+      "lang": "he",
+      "type": "specific",
+      "question": "איך לעודד תינוק לזחול?",
+      "expected": [
+        "4.2"
+      ],
+      "retrieved": "4.2",
+      "top3": [
+        "4.2",
+        "2.7",
+        "6.2"
+      ],
+      "milestoneTop1": true,
+      "milestoneTop3": true,
+      "notCoveredCorrect": true,
+      "activities": [
+        "4.2-E4",
+        "4.2-E8",
+        "4.2-E9"
+      ],
+      "videos": [
+        "4.2.8:DsUGbLJIcQg:he/educator",
+        "4.2.8:TinOzZjbho0:he/parent",
+        "4.2.1:sCQtrIXzJSw:he/educator",
+        "4.2.1:1jXgQUAc1U8:he/parent"
+      ],
+      "expectedVideoSegment": null,
+      "videoSegmentHit": null,
+      "videosAllMapped": true,
+      "citation": "handbook-he p.46",
+      "citationLanguageCorrect": true,
+      "grounded": "extractive",
+      "topSimilarity": 0.8892,
+      "coverage": 0.5,
+      "answerLanguageCorrect": true,
+      "ms": 80,
+      "error": null
+    },
+    {
+      "id": "he-11",
+      "lang": "he",
+      "type": "specific",
+      "question": "התינוק לא מגיב כשקוראים לו בשמו",
+      "expected": [
+        "4.4"
+      ],
+      "retrieved": "4.4",
+      "top3": [
+        "4.4",
+        "2.2",
+        "2.3"
+      ],
+      "milestoneTop1": true,
+      "milestoneTop3": true,
+      "notCoveredCorrect": true,
+      "activities": [
+        "4.4-E2",
+        "4.4-E3",
+        "4.4-E5"
+      ],
+      "videos": [
+        "4.4.3:emIM-ON8b9U:he/educator",
+        "4.4.3:maidGBwQlXQ:he/parent",
+        "4.4.4:9_zNFZTK0yQ:he/educator",
+        "4.4.4:qa3CGzxJCVk:he/parent"
+      ],
+      "expectedVideoSegment": null,
+      "videoSegmentHit": null,
+      "videosAllMapped": true,
+      "citation": "handbook-he p.50",
+      "citationLanguageCorrect": true,
+      "grounded": "extractive",
+      "topSimilarity": 0.9033,
+      "coverage": 0.75,
+      "answerLanguageCorrect": true,
+      "ms": 120,
+      "error": null
+    },
+    {
+      "id": "he-12",
+      "lang": "he",
+      "type": "specific",
+      "question": "אילו פעילויות מחזקות תפיסת צבת?",
+      "expected": [
+        "4.7"
+      ],
+      "retrieved": "4.7",
+      "top3": [
+        "4.7",
+        "2.7",
+        "8.4"
+      ],
+      "milestoneTop1": true,
+      "milestoneTop3": true,
+      "notCoveredCorrect": true,
+      "activities": [
+        "4.7-E1",
+        "4.7-E9",
+        "4.7-E6"
+      ],
+      "videos": [
+        "4.7.1:yfp4GphVIt0:he/educator",
+        "4.7.1:9c1R-yM1Np4:he/parent",
+        "4.7.2:gNjXmUT9t30:he/educator",
+        "4.7.2:fi52XZ13Dts:he/parent"
+      ],
+      "expectedVideoSegment": null,
+      "videoSegmentHit": null,
+      "videosAllMapped": true,
+      "citation": "handbook-he p.56",
+      "citationLanguageCorrect": true,
+      "grounded": "extractive",
+      "topSimilarity": 0.877,
+      "coverage": 0.75,
+      "answerLanguageCorrect": true,
+      "ms": 100,
+      "error": null
+    },
+    {
+      "id": "he-13",
+      "lang": "he",
+      "type": "specific",
+      "question": "איך לעודד תינוק לשבת בכוחות עצמו?",
+      "expected": [
+        "4.9"
+      ],
+      "retrieved": "4.9",
+      "top3": [
+        "4.9",
+        "5.3",
+        "4.6"
+      ],
+      "milestoneTop1": true,
+      "milestoneTop3": true,
+      "notCoveredCorrect": true,
+      "activities": [
+        "4.9-E9",
+        "4.9-E5",
+        "4.9-E6"
+      ],
+      "videos": [
+        "4.9.1:9iFx2q8r3LU:he/educator",
+        "4.9.1:uS8Mo8CtE5s:he/parent",
+        "4.9.2:YceuN9EoazM:he/educator",
+        "4.9.2:G9Em20vWDpA:he/parent"
+      ],
+      "expectedVideoSegment": null,
+      "videoSegmentHit": null,
+      "videosAllMapped": true,
+      "citation": "handbook-he p.60",
+      "citationLanguageCorrect": true,
+      "grounded": "extractive",
+      "topSimilarity": 0.873,
+      "coverage": 0.75,
+      "answerLanguageCorrect": true,
+      "ms": 70,
+      "error": null
+    },
+    {
+      "id": "he-14",
+      "lang": "he",
+      "type": "specific",
+      "question": "פעוט בן 14 חודשים שעדיין לא הולך בתמיכה, מה אפשר לעשות?",
+      "expected": [
+        "5.4",
+        "5.3"
+      ],
+      "retrieved": "5.4",
+      "top3": [
+        "5.4",
+        "6.2",
+        "5.3"
+      ],
+      "milestoneTop1": true,
+      "milestoneTop3": true,
+      "notCoveredCorrect": true,
+      "activities": [
+        "5.4-E9",
+        "5.4-E11",
+        "5.4-E5"
+      ],
+      "videos": [
+        "5.4.4:ngArZrN174U:he/educator",
+        "5.4.4:kDd83VwX0bY:he/parent",
+        "5.4.8:jkgG98CgLE8:he/educator",
+        "5.4.8:xk7EYLgi2ws:he/parent"
+      ],
+      "expectedVideoSegment": null,
+      "videoSegmentHit": null,
+      "videosAllMapped": true,
+      "citation": "handbook-he p.72",
+      "citationLanguageCorrect": true,
+      "grounded": "extractive",
+      "topSimilarity": 0.8796,
+      "coverage": 0.6,
+      "answerLanguageCorrect": true,
+      "ms": 70,
+      "error": null
+    },
+    {
+      "id": "he-15",
+      "lang": "he",
+      "type": "specific",
+      "question": "איך לעודד פעוט להצביע על חפצים מוכרים כשמבקשים ממנו?",
+      "expected": [
+        "5.5"
+      ],
+      "retrieved": "5.5",
+      "top3": [
+        "5.5",
+        "7.3",
+        "5.1"
+      ],
+      "milestoneTop1": true,
+      "milestoneTop3": true,
+      "notCoveredCorrect": true,
+      "activities": [
+        "5.5-E6",
+        "5.5-E5",
+        "5.5-E3"
+      ],
+      "videos": [
+        "5.5.1:zWntvLA4Hbs:he/educator",
+        "5.5.1:XNYzyXX7Pik:he/parent",
+        "5.5.6:Tli_1xMtxZ0:he/educator",
+        "5.5.6:UEmZUs4YM-g:he/parent"
+      ],
+      "expectedVideoSegment": null,
+      "videoSegmentHit": null,
+      "videosAllMapped": true,
+      "citation": "handbook-he p.74",
+      "citationLanguageCorrect": true,
+      "grounded": "extractive",
+      "topSimilarity": 0.8978,
+      "coverage": 0.67,
+      "answerLanguageCorrect": true,
+      "ms": 74,
+      "error": null
+    },
+    {
+      "id": "he-16",
+      "lang": "he",
+      "type": "specific",
+      "question": "משחקים של הכנסת קובייה לתוך כוס",
+      "expected": [
+        "5.7"
+      ],
+      "retrieved": "5.7",
+      "top3": [
+        "5.7",
+        "6.8",
+        "5.2"
+      ],
+      "milestoneTop1": true,
+      "milestoneTop3": true,
+      "notCoveredCorrect": true,
+      "activities": [
+        "5.7-E4",
+        "5.7-E7",
+        "5.7-E1"
+      ],
+      "videos": [
+        "5.7.5:a7YfsDZanGg:he/educator",
+        "5.7.5:gReE4LHhlFE:he/parent",
+        "5.7.8:1NV2Gg4horA:he/educator",
+        "5.7.8:yNlS-a_O9ds:he/parent"
+      ],
+      "expectedVideoSegment": null,
+      "videoSegmentHit": null,
+      "videosAllMapped": true,
+      "citation": "handbook-he p.78",
+      "citationLanguageCorrect": true,
+      "grounded": "extractive",
+      "topSimilarity": 0.873,
+      "coverage": 0.8,
+      "answerLanguageCorrect": true,
+      "ms": 75,
+      "error": null
+    },
+    {
+      "id": "he-17",
+      "lang": "he",
+      "type": "specific",
+      "question": "איך ללמד פעוט להכיר את חלקי הגוף?",
+      "expected": [
+        "6.1"
+      ],
+      "retrieved": "6.1",
+      "top3": [
+        "6.1",
+        "5.5",
+        "3.4"
+      ],
+      "milestoneTop1": true,
+      "milestoneTop3": true,
+      "notCoveredCorrect": true,
+      "activities": [
+        "6.1-E4",
+        "6.1-E8",
+        "6.1-E2"
+      ],
+      "videos": [
+        "6.1.3:1BIOc9y3FZg:he/educator",
+        "6.1.3:fpMc31HrP0I:he/parent",
+        "6.1.5:INhKDVeArGw:he/educator",
+        "6.1.5:1zsM3Ov18N8:he/parent"
+      ],
+      "expectedVideoSegment": null,
+      "videoSegmentHit": null,
+      "videosAllMapped": true,
+      "citation": "handbook-he p.82",
+      "citationLanguageCorrect": true,
+      "grounded": "extractive",
+      "topSimilarity": 0.9038,
+      "coverage": 0.75,
+      "answerLanguageCorrect": true,
+      "ms": 73,
+      "error": null
+    },
+    {
+      "id": "he-18",
+      "lang": "he",
+      "type": "specific",
+      "question": "איך לעודד פעוט לאכול לבד עם כפית?",
+      "expected": [
+        "6.4"
+      ],
+      "retrieved": "6.4",
+      "top3": [
+        "6.4",
+        "4.6",
+        "6.2"
+      ],
+      "milestoneTop1": true,
+      "milestoneTop3": true,
+      "notCoveredCorrect": true,
+      "activities": [
+        "6.4-E4",
+        "6.4-E6",
+        "6.4-E1"
+      ],
+      "videos": [
+        "6.4.1:hbwZDos4Ag0:he/educator",
+        "6.4.1:9paq8rjxuRU:he/parent",
+        "6.4.2:UeJgGcV7AZ8:he/educator",
+        "6.4.2:MkzJS5DLg9w:he/parent"
+      ],
+      "expectedVideoSegment": null,
+      "videoSegmentHit": null,
+      "videosAllMapped": true,
+      "citation": "handbook-he p.88",
+      "citationLanguageCorrect": true,
+      "grounded": "extractive",
+      "topSimilarity": 0.8962,
+      "coverage": 0.5,
+      "answerLanguageCorrect": true,
+      "ms": 81,
+      "error": null
+    },
+    {
+      "id": "he-19",
+      "lang": "he",
+      "type": "specific",
+      "question": "פעילויות לבניית מגדל מקוביות",
+      "expected": [
+        "6.5"
+      ],
+      "retrieved": "6.5",
+      "top3": [
+        "6.5",
+        "8.3",
+        "4.8"
+      ],
+      "milestoneTop1": true,
+      "milestoneTop3": true,
+      "notCoveredCorrect": true,
+      "activities": [
+        "6.5-E5",
+        "6.5-E4",
+        "6.5-E3"
+      ],
+      "videos": [
+        "6.5.1:JTd54e7yXz8:he/educator",
+        "6.5.1:hn4PRa6NNrw:he/parent",
+        "6.5.4:MJGQEL9r1I4:he/educator",
+        "6.5.4:YSqoW5RmeHo:he/parent"
+      ],
+      "expectedVideoSegment": null,
+      "videoSegmentHit": null,
+      "videosAllMapped": true,
+      "citation": "handbook-he p.90",
+      "citationLanguageCorrect": true,
+      "grounded": "extractive",
+      "topSimilarity": 0.9031,
+      "coverage": 1,
+      "answerLanguageCorrect": true,
+      "ms": 94,
+      "error": null
+    },
+    {
+      "id": "he-20",
+      "lang": "he",
+      "type": "specific",
+      "question": "ילד בן שנתיים וחצי שעדיין לא מחבר שתי מילים למשפט",
+      "expected": [
+        "7.4"
+      ],
+      "retrieved": "7.4",
+      "top3": [
+        "7.4",
+        "6.7",
+        "5.6"
+      ],
+      "milestoneTop1": true,
+      "milestoneTop3": true,
+      "notCoveredCorrect": true,
+      "activities": [
+        "7.4-E11",
+        "7.4-E2",
+        "7.4-E1"
+      ],
+      "videos": [
+        "7.4.1:sG-JmaqJPhY:he/parent",
+        "7.4.2:gXQ2tN_QUKM:he/parent",
+        "7.4.7:8JdhO8sZzx4:he/parent",
+        "7.4.11:YsYvEYgB7N0:he/parent"
+      ],
+      "expectedVideoSegment": null,
+      "videoSegmentHit": null,
+      "videosAllMapped": true,
+      "citation": "handbook-he p.108",
+      "citationLanguageCorrect": true,
+      "grounded": "extractive",
+      "topSimilarity": 0.8837,
+      "coverage": 0.71,
+      "answerLanguageCorrect": true,
+      "ms": 95,
+      "error": null
+    },
+    {
+      "id": "he-21",
+      "lang": "he",
+      "type": "specific",
+      "question": "איך לעודד משחק סימבולי ומשחק דמיון?",
+      "expected": [
+        "7.9"
+      ],
+      "retrieved": "7.9",
+      "top3": [
+        "7.9",
+        "6.8",
+        "5.2"
+      ],
+      "milestoneTop1": true,
+      "milestoneTop3": true,
+      "notCoveredCorrect": true,
+      "activities": [
+        "7.9-E11",
+        "7.9-E10",
+        "7.9-E5"
+      ],
+      "videos": [
+        "7.9.7:vXX8yVH80nA:he/parent",
+        "7.9.8:Mj2EXJfNOWQ:he/parent",
+        "7.9.10:XaDaZvxiYe0:he/parent",
+        "7.9.11:0XWlUIH_UR0:he/parent"
+      ],
+      "expectedVideoSegment": null,
+      "videoSegmentHit": null,
+      "videosAllMapped": true,
+      "citation": "handbook-he p.118",
+      "citationLanguageCorrect": true,
+      "grounded": "extractive",
+      "topSimilarity": 0.8911,
+      "coverage": 0.8,
+      "answerLanguageCorrect": true,
+      "ms": 73,
+      "error": null
+    },
+    {
+      "id": "he-22",
+      "lang": "he",
+      "type": "specific",
+      "question": "ילד בן שלוש לא מצליח לקפוץ ממדרגה",
+      "expected": [
+        "8.3"
+      ],
+      "retrieved": "8.3",
+      "top3": [
+        "8.3",
+        "7.6",
+        "8.5"
+      ],
+      "milestoneTop1": true,
+      "milestoneTop3": true,
+      "notCoveredCorrect": true,
+      "activities": [
+        "8.3-E3",
+        "8.3-E1",
+        "8.3-E2"
+      ],
+      "videos": [
+        "8.3.1:osrIH9A18nI:he/educator",
+        "8.3.1:dXMxYAUz6Is:he/parent",
+        "8.3.2:dcURGI7d3PU:he/educator",
+        "8.3.2:8SwQ1a-EXEs:he/parent"
+      ],
+      "expectedVideoSegment": null,
+      "videoSegmentHit": null,
+      "videosAllMapped": true,
+      "citation": "handbook-he p.126",
+      "citationLanguageCorrect": true,
+      "grounded": "extractive",
+      "topSimilarity": 0.8615,
+      "coverage": 0.75,
+      "answerLanguageCorrect": true,
+      "ms": 70,
+      "error": null
+    },
+    {
+      "id": "he-23",
+      "lang": "he",
+      "type": "specific",
+      "question": "איך לעזור לילד בן שלוש להתלבש לבד?",
+      "expected": [
+        "8.4"
+      ],
+      "retrieved": "8.4",
+      "top3": [
+        "8.4",
+        "8.1",
+        "8.3"
+      ],
+      "milestoneTop1": true,
+      "milestoneTop3": true,
+      "notCoveredCorrect": true,
+      "activities": [
+        "8.4-E3",
+        "8.4-E1",
+        "8.4-E2"
+      ],
+      "videos": [
+        "8.4.1:ReMotKsqG5M:he/educator",
+        "8.4.1:N5WmEQeohBg:he/parent",
+        "8.4.2:_JHWYKZVqSE:he/educator",
+        "8.4.2:99btAxdUvu0:he/parent"
+      ],
+      "expectedVideoSegment": null,
+      "videoSegmentHit": null,
+      "videosAllMapped": true,
+      "citation": "handbook-he p.128",
+      "citationLanguageCorrect": true,
+      "grounded": "extractive",
+      "topSimilarity": 0.8724,
+      "coverage": 0.6,
+      "answerLanguageCorrect": true,
+      "ms": 286,
+      "error": null
+    },
+    {
+      "id": "he-24",
+      "lang": "he",
+      "type": "specific",
+      "question": "תרגול העתקת עיגול וסימן פלוס",
+      "expected": [
+        "8.5",
+        "7.8"
+      ],
+      "retrieved": "8.5",
+      "top3": [
+        "8.5",
+        "7.6",
+        "8.3"
+      ],
+      "milestoneTop1": true,
+      "milestoneTop3": true,
+      "notCoveredCorrect": true,
+      "activities": [
+        "8.5-E6",
+        "8.5-E1",
+        "8.5-E5"
+      ],
+      "videos": [
+        "8.5.1:gcsUchlge9o:he/educator",
+        "8.5.1:OV1oL4Un908:he/parent",
+        "8.5.2:ETucoNJqLeE:he/educator",
+        "8.5.2:miC0DD0VMXs:he/parent"
+      ],
+      "expectedVideoSegment": null,
+      "videoSegmentHit": null,
+      "videosAllMapped": true,
+      "citation": "handbook-he p.130",
+      "citationLanguageCorrect": true,
+      "grounded": "extractive",
+      "topSimilarity": 0.8825,
+      "coverage": 0.8,
+      "answerLanguageCorrect": true,
+      "ms": 100,
+      "error": null
+    },
+    {
+      "id": "he-25",
+      "lang": "he",
+      "type": "broad",
+      "question": "מה אפשר לעשות עם ילד בן שנתיים שמתקשה לדבר?",
+      "expected": [
+        "7.4",
+        "7.1",
+        "7.3",
+        "6.7",
+        "8.2"
+      ],
+      "retrieved": "7.4",
+      "top3": [
+        "7.4",
+        "6.7",
+        "7.5"
+      ],
+      "milestoneTop1": true,
+      "milestoneTop3": true,
+      "notCoveredCorrect": true,
+      "activities": [
+        "7.4-E11",
+        "7.4-E2",
+        "7.4-E1"
+      ],
+      "videos": [
+        "7.4.1:sG-JmaqJPhY:he/parent",
+        "7.4.2:gXQ2tN_QUKM:he/parent",
+        "7.4.11:YsYvEYgB7N0:he/parent",
+        "null:loeoqtigB4o:he/educator"
+      ],
+      "expectedVideoSegment": null,
+      "videoSegmentHit": null,
+      "videosAllMapped": true,
+      "citation": "handbook-he p.108",
+      "citationLanguageCorrect": true,
+      "grounded": "extractive",
+      "topSimilarity": 0.881,
+      "coverage": 0.33,
+      "answerLanguageCorrect": true,
+      "ms": 75,
+      "error": null
+    },
+    {
+      "id": "he-26",
+      "lang": "he",
+      "type": "broad",
+      "question": "אילו משחקים יכולים לשפר מוטוריקה עדינה?",
+      "expected": [
+        "4.1",
+        "4.7",
+        "5.7",
+        "6.5",
+        "7.8",
+        "8.5",
+        "3.1",
+        "2.5",
+        "2.6"
+      ],
+      "retrieved": "4.7",
+      "top3": [
+        "4.7",
+        "6.8",
+        "4.6"
+      ],
+      "milestoneTop1": true,
+      "milestoneTop3": true,
+      "notCoveredCorrect": true,
+      "activities": [
+        "4.7-E1",
+        "4.7-E4",
+        "4.7-E2"
+      ],
+      "videos": [
+        "4.7.1:yfp4GphVIt0:he/educator",
+        "4.7.1:9c1R-yM1Np4:he/parent",
+        "4.7.2:gNjXmUT9t30:he/educator",
+        "4.7.2:fi52XZ13Dts:he/parent"
+      ],
+      "expectedVideoSegment": null,
+      "videoSegmentHit": null,
+      "videosAllMapped": true,
+      "citation": "handbook-he p.56",
+      "citationLanguageCorrect": true,
+      "grounded": "extractive",
+      "topSimilarity": 0.8514,
+      "coverage": 0.75,
+      "answerLanguageCorrect": true,
+      "ms": 84,
+      "error": null
+    },
+    {
+      "id": "he-27",
+      "lang": "he",
+      "type": "video",
+      "question": "שימוש בצעצועים בולטים ומושכי עין לתינוק",
+      "expected": [
+        "1.1"
+      ],
+      "retrieved": "1.1",
+      "top3": [
+        "1.1",
+        "2.1",
+        "3.1"
+      ],
+      "milestoneTop1": true,
+      "milestoneTop3": true,
+      "notCoveredCorrect": true,
+      "activities": [
+        "1.1-E1",
+        "1.1-E2",
+        "1.1-E3"
+      ],
+      "videos": [
+        "1.1.2:36Dya9njr7g:he/educator",
+        "1.1.2:fXgVavLxp9w:he/parent",
+        "1.1.3:j312B6F7PUI:he/educator",
+        "1.1.3:5R2Rd1zV7mY:he/parent"
+      ],
+      "expectedVideoSegment": "1.1.3",
+      "videoSegmentHit": true,
+      "videosAllMapped": true,
+      "citation": "handbook-he p.8",
+      "citationLanguageCorrect": true,
+      "grounded": "extractive",
+      "topSimilarity": 0.8914,
+      "coverage": 0.83,
+      "answerLanguageCorrect": true,
+      "ms": 123,
+      "error": null
+    },
+    {
+      "id": "he-28",
+      "lang": "he",
+      "type": "specific",
+      "question": "איך מלמדים פעוט לעלות במדרגות?",
+      "expected": [
+        "6.3",
+        "7.6"
+      ],
+      "retrieved": "7.6",
+      "top3": [
+        "7.6",
+        "6.3",
+        "7.5"
+      ],
+      "milestoneTop1": true,
+      "milestoneTop3": true,
+      "notCoveredCorrect": true,
+      "activities": [
+        "7.6-E14",
+        "7.6-E6",
+        "7.6-E3"
+      ],
+      "videos": [
+        "7.6.1:FbjKQC1OGHM:he/parent",
+        "null:pMZ29YREIm8:he/educator",
+        "null:Z4fIWnLmlmQ:he/educator",
+        "null:buQcF0xZW7I:he/educator"
+      ],
+      "expectedVideoSegment": null,
+      "videoSegmentHit": null,
+      "videosAllMapped": true,
+      "citation": "handbook-he p.112",
+      "citationLanguageCorrect": true,
+      "grounded": "extractive",
+      "topSimilarity": 0.8803,
+      "coverage": 0.67,
+      "answerLanguageCorrect": true,
+      "ms": 108,
+      "error": null
+    },
+    {
+      "id": "he-29",
+      "lang": "he",
+      "type": "off_topic",
+      "question": "מה המתכון לעוגת שוקולד?",
+      "expected": [],
+      "retrieved": null,
+      "top3": [
+        "4.6",
+        "6.6",
+        "2.1"
+      ],
+      "milestoneTop1": null,
+      "milestoneTop3": null,
+      "notCoveredCorrect": true,
+      "activities": [],
+      "videos": [],
+      "expectedVideoSegment": null,
+      "videoSegmentHit": null,
+      "videosAllMapped": true,
+      "citation": null,
+      "citationLanguageCorrect": true,
+      "grounded": "not_covered",
+      "topSimilarity": 0.7945,
+      "coverage": 0,
+      "answerLanguageCorrect": true,
+      "ms": 40,
+      "error": null
+    },
+    {
+      "id": "he-30",
+      "lang": "he",
+      "type": "off_topic",
+      "question": "איך מחליפים צמיג ברכב?",
+      "expected": [],
+      "retrieved": null,
+      "top3": [
+        "7.8",
+        "7.9",
+        "3.4"
+      ],
+      "milestoneTop1": null,
+      "milestoneTop3": null,
+      "notCoveredCorrect": true,
+      "activities": [],
+      "videos": [],
+      "expectedVideoSegment": null,
+      "videoSegmentHit": null,
+      "videosAllMapped": true,
+      "citation": null,
+      "citationLanguageCorrect": true,
+      "grounded": "not_covered",
+      "topSimilarity": 0.7976,
+      "coverage": 0,
+      "answerLanguageCorrect": true,
+      "ms": 42,
+      "error": null
+    },
+    {
+      "id": "ar-01",
+      "lang": "ar",
+      "type": "broad",
+      "question": "ما الأنشطة التي تساعد الرضيع على متابعة الأشياء بعينيه؟",
+      "expected": [
+        "1.1",
+        "2.1"
+      ],
+      "retrieved": null,
+      "top3": [
+        "2.1",
+        "2.6",
+        "1.1"
+      ],
+      "milestoneTop1": false,
+      "milestoneTop3": true,
+      "notCoveredCorrect": false,
+      "activities": [],
+      "videos": [],
+      "expectedVideoSegment": null,
+      "videoSegmentHit": null,
+      "videosAllMapped": true,
+      "citation": null,
+      "citationLanguageCorrect": true,
+      "grounded": "not_covered",
+      "topSimilarity": 0.8647,
+      "coverage": 0.2,
+      "answerLanguageCorrect": true,
+      "ms": 43,
+      "error": null
+    },
+    {
+      "id": "ar-02",
+      "lang": "ar",
+      "type": "broad",
+      "question": "كيف أساعد طفلاً عمره سنتان على تطوير اللغة؟",
+      "expected": [
+        "7.4",
+        "7.1",
+        "7.3",
+        "6.7",
+        "8.2"
+      ],
+      "retrieved": "6.7",
+      "top3": [
+        "6.7",
+        "7.4",
+        "8.2"
+      ],
+      "milestoneTop1": true,
+      "milestoneTop3": true,
+      "notCoveredCorrect": true,
+      "activities": [
+        "6.7-E11",
+        "6.7-E10",
+        "6.7-E5"
+      ],
+      "videos": [
+        "6.7.1:SCRO__Q_JbU:ar/educator",
+        "6.7.7:niI1o6VzM1E:ar/educator",
+        "6.7.8:_aBhb7P_F50:ar/educator",
+        "6.7.9:aaaKo6F6KbA:ar/educator"
+      ],
+      "expectedVideoSegment": null,
+      "videoSegmentHit": null,
+      "videosAllMapped": true,
+      "citation": "handbook-ar p.94",
+      "citationLanguageCorrect": true,
+      "grounded": "extractive",
+      "topSimilarity": 0.8903,
+      "coverage": 0.2,
+      "answerLanguageCorrect": true,
+      "ms": 100,
+      "error": null
+    },
+    {
+      "id": "ar-03",
+      "lang": "ar",
+      "type": "specific",
+      "question": "كيف أشجّع الطفل على الأكل بالملعقة؟",
+      "expected": [
+        "6.4"
+      ],
+      "retrieved": "6.4",
+      "top3": [
+        "6.4",
+        "4.6",
+        "1.4"
+      ],
+      "milestoneTop1": true,
+      "milestoneTop3": true,
+      "notCoveredCorrect": true,
+      "activities": [
+        "6.4-E5",
+        "6.4-E2",
+        "6.4-E1"
+      ],
+      "videos": [
+        "6.4.1:z_moLnnl6KQ:ar/educator",
+        "6.4.2:CVxJwDG8ZmY:ar/educator",
+        "6.4.3:Ho6Z80Fpy1Y:ar/educator",
+        "6.4.6:xz0kL1PJj38:ar/educator"
+      ],
+      "expectedVideoSegment": null,
+      "videoSegmentHit": null,
+      "videosAllMapped": true,
+      "citation": "handbook-ar p.88",
+      "citationLanguageCorrect": true,
+      "grounded": "extractive",
+      "topSimilarity": 0.8987,
+      "coverage": 0.33,
+      "answerLanguageCorrect": true,
+      "ms": 90,
+      "error": null
+    },
+    {
+      "id": "ar-04",
+      "lang": "ar",
+      "type": "specific",
+      "question": "كيف أساعد الرضيع على الحبو؟",
+      "expected": [
+        "4.2"
+      ],
+      "retrieved": "4.2",
+      "top3": [
+        "4.2",
+        "1.4",
+        "2.7"
+      ],
+      "milestoneTop1": true,
+      "milestoneTop3": true,
+      "notCoveredCorrect": true,
+      "activities": [
+        "4.2-E2",
+        "4.2-E11",
+        "4.2-E1"
+      ],
+      "videos": [
+        "4.2.2:4CjISmaxfTE:ar/educator",
+        "4.2.3:-UUGxY8K-0M:ar/educator",
+        "4.2.4:nsI7MQYuUtU:ar/educator",
+        "4.2.11:YnqruSxJfpA:ar/educator"
+      ],
+      "expectedVideoSegment": null,
+      "videoSegmentHit": null,
+      "videosAllMapped": true,
+      "citation": "handbook-ar p.46",
+      "citationLanguageCorrect": true,
+      "grounded": "extractive",
+      "topSimilarity": 0.8688,
+      "coverage": 0.5,
+      "answerLanguageCorrect": true,
+      "ms": 91,
+      "error": null
+    },
+    {
+      "id": "ar-05",
+      "lang": "ar",
+      "type": "specific",
+      "question": "طفل عمره ثلاث سنوات لا يستطيع القفز من على درجة",
+      "expected": [
+        "8.3"
+      ],
+      "retrieved": "8.3",
+      "top3": [
+        "8.3",
+        "8.1",
+        "8.4"
+      ],
+      "milestoneTop1": true,
+      "milestoneTop3": true,
+      "notCoveredCorrect": true,
+      "activities": [
+        "8.3-E3",
+        "8.3-E1",
+        "8.3-E5"
+      ],
+      "videos": [
+        "8.3.2:ZMN0SW2Jg3M:ar/educator",
+        "8.3.4:WEUgc7lmAl0:ar/educator",
+        "8.3.5:NGannhdk5NM:ar/educator",
+        "8.3.1:e0E3CG9DlLQ:ar/educator"
+      ],
+      "expectedVideoSegment": null,
+      "videoSegmentHit": null,
+      "videosAllMapped": true,
+      "citation": "handbook-ar p.126",
+      "citationLanguageCorrect": true,
+      "grounded": "extractive",
+      "topSimilarity": 0.8802,
+      "coverage": 0.6,
+      "answerLanguageCorrect": true,
+      "ms": 119,
+      "error": null
+    },
+    {
+      "id": "ar-06",
+      "lang": "ar",
+      "type": "specific",
+      "question": "كيف نشجّع اللعب الرمزي عند الأطفال؟",
+      "expected": [
+        "7.9"
+      ],
+      "retrieved": "7.9",
+      "top3": [
+        "7.9",
+        "6.8",
+        "6.9"
+      ],
+      "milestoneTop1": true,
+      "milestoneTop3": true,
+      "notCoveredCorrect": true,
+      "activities": [
+        "7.9-E3",
+        "7.9-E8",
+        "7.9-E2"
+      ],
+      "videos": [
+        "7.9.1:mGJJDA6EDbE:ar/educator",
+        "7.9.2:23SQYZ_WTG8:ar/educator",
+        "7.9.3:D3odebCu0WM:ar/educator",
+        "7.9.4:NJXIcyZB1rE:ar/educator"
+      ],
+      "expectedVideoSegment": null,
+      "videoSegmentHit": null,
+      "videosAllMapped": true,
+      "citation": "handbook-ar p.118",
+      "citationLanguageCorrect": true,
+      "grounded": "extractive",
+      "topSimilarity": 0.9164,
+      "coverage": 0.6,
+      "answerLanguageCorrect": true,
+      "ms": 94,
+      "error": null
+    },
+    {
+      "id": "ar-07",
+      "lang": "ar",
+      "type": "specific",
+      "question": "كيف أطوّر قبضة الكماشة عند الرضيع؟",
+      "expected": [
+        "4.7"
+      ],
+      "retrieved": "4.7",
+      "top3": [
+        "4.7",
+        "1.4",
+        "2.6"
+      ],
+      "milestoneTop1": true,
+      "milestoneTop3": true,
+      "notCoveredCorrect": true,
+      "activities": [
+        "4.7-E1",
+        "4.7-E8",
+        "4.7-E9"
+      ],
+      "videos": [],
+      "expectedVideoSegment": null,
+      "videoSegmentHit": null,
+      "videosAllMapped": true,
+      "citation": "handbook-ar p.56",
+      "citationLanguageCorrect": true,
+      "grounded": "extractive",
+      "topSimilarity": 0.8995,
+      "coverage": 0.5,
+      "answerLanguageCorrect": true,
+      "ms": 109,
+      "error": null
+    },
+    {
+      "id": "ar-08",
+      "lang": "ar",
+      "type": "specific",
+      "question": "طفل لا يلتفت عندما ننادي باسمه",
+      "expected": [
+        "4.4"
+      ],
+      "retrieved": "4.4",
+      "top3": [
+        "4.4",
+        "1.3",
+        "2.2"
+      ],
+      "milestoneTop1": true,
+      "milestoneTop3": true,
+      "notCoveredCorrect": true,
+      "activities": [
+        "4.4-E6",
+        "4.4-E5",
+        "4.4-E3"
+      ],
+      "videos": [
+        "4.4.4:rj3RrOvgcB0:ar/educator",
+        "4.4.9:unmIsQ1p9Xc:ar/educator",
+        "4.4.1:dmKKcqU5JOA:ar/educator",
+        "4.4.2:UhJpQwkjuh8:ar/educator"
+      ],
+      "expectedVideoSegment": null,
+      "videoSegmentHit": null,
+      "videosAllMapped": true,
+      "citation": "handbook-ar p.50",
+      "citationLanguageCorrect": true,
+      "grounded": "extractive",
+      "topSimilarity": 0.8778,
+      "coverage": 0.5,
+      "answerLanguageCorrect": true,
+      "ms": 111,
+      "error": null
+    },
+    {
+      "id": "ar-09",
+      "lang": "ar",
+      "type": "specific",
+      "question": "كيف نشجّع الابتسامة الاجتماعية عند الرضيع؟",
+      "expected": [
+        "1.3"
+      ],
+      "retrieved": "1.3",
+      "top3": [
+        "1.3",
+        "4.4",
+        "5.2"
+      ],
+      "milestoneTop1": true,
+      "milestoneTop3": true,
+      "notCoveredCorrect": true,
+      "activities": [
+        "1.3-E3",
+        "1.3-E2",
+        "1.3-E4"
+      ],
+      "videos": [
+        "1.3.1:liHZlzb63aY:ar/educator",
+        "1.3.3:oxMTR4MukfE:ar/educator",
+        "1.3.5:8oitrXE80W0:ar/educator",
+        "1.3.6:hnhdqWmQS-k:ar/educator"
+      ],
+      "expectedVideoSegment": null,
+      "videoSegmentHit": null,
+      "videosAllMapped": true,
+      "citation": "handbook-ar p.12",
+      "citationLanguageCorrect": true,
+      "grounded": "extractive",
+      "topSimilarity": 0.9087,
+      "coverage": 0.5,
+      "answerLanguageCorrect": true,
+      "ms": 93,
+      "error": null
+    },
+    {
+      "id": "ar-10",
+      "lang": "ar",
+      "type": "specific",
+      "question": "كيف أساعد الطفل على بناء برج من المكعبات؟",
+      "expected": [
+        "6.5"
+      ],
+      "retrieved": "6.5",
+      "top3": [
+        "6.5",
+        "5.7",
+        "7.4"
+      ],
+      "milestoneTop1": true,
+      "milestoneTop3": true,
+      "notCoveredCorrect": true,
+      "activities": [
+        "6.5-E3",
+        "6.5-E4",
+        "6.5-E6"
+      ],
+      "videos": [
+        "6.5.3:OPW3Gbme3ow:ar/educator",
+        "6.5.4:9W7r-kQ8vbo:ar/educator",
+        "6.5.5:zIQjyJrhRMI:ar/educator",
+        "6.5.7:DWmExKOxOEQ:ar/educator"
+      ],
+      "expectedVideoSegment": null,
+      "videoSegmentHit": null,
+      "videosAllMapped": true,
+      "citation": "handbook-ar p.90",
+      "citationLanguageCorrect": true,
+      "grounded": "extractive",
+      "topSimilarity": 0.9133,
+      "coverage": 0.75,
+      "answerLanguageCorrect": true,
+      "ms": 93,
+      "error": null
+    },
+    {
+      "id": "ar-11",
+      "lang": "ar",
+      "type": "video",
+      "question": "استعمال ألعاب بارزة وملفتة للنظر للرضيع",
+      "expected": [
+        "1.1"
+      ],
+      "retrieved": "1.1",
+      "top3": [
+        "1.1",
+        "7.3",
+        "6.8"
+      ],
+      "milestoneTop1": true,
+      "milestoneTop3": true,
+      "notCoveredCorrect": true,
+      "activities": [
+        "1.1-E1",
+        "1.1-E2",
+        "1.1-E3"
+      ],
+      "videos": [
+        "1.1.2:LG-AImdjzSw:ar/educator",
+        "1.1.3:e4RsJQ4yJMo:ar/educator",
+        "1.1.1:pn-JcrmEDA0:ar/educator",
+        "1.1.4:dIzoimC-730:ar/educator"
+      ],
+      "expectedVideoSegment": "1.1.3",
+      "videoSegmentHit": true,
+      "videosAllMapped": true,
+      "citation": "handbook-ar p.8",
+      "citationLanguageCorrect": true,
+      "grounded": "extractive",
+      "topSimilarity": 0.8799,
+      "coverage": 0.83,
+      "answerLanguageCorrect": true,
+      "ms": 136,
+      "error": null
+    },
+    {
+      "id": "ar-12",
+      "lang": "ar",
+      "type": "off_topic",
+      "question": "ما هي عاصمة فرنسا؟",
+      "expected": [],
+      "retrieved": null,
+      "top3": [
+        "7.3",
+        "7.5",
+        "6.6"
+      ],
+      "milestoneTop1": null,
+      "milestoneTop3": null,
+      "notCoveredCorrect": true,
+      "activities": [],
+      "videos": [],
+      "expectedVideoSegment": null,
+      "videoSegmentHit": null,
+      "videosAllMapped": true,
+      "citation": null,
+      "citationLanguageCorrect": true,
+      "grounded": "not_covered",
+      "topSimilarity": 0.7422,
+      "coverage": 0,
+      "answerLanguageCorrect": true,
+      "ms": 50,
+      "error": null
+    },
+    {
+      "id": "nd-he-01",
+      "lang": "he",
+      "type": "near_domain",
+      "question": "איך מורידים חום גבוה לתינוק?",
+      "expected": [],
+      "retrieved": null,
+      "top3": [
+        "2.7",
+        "4.2",
+        "4.7"
+      ],
+      "milestoneTop1": null,
+      "milestoneTop3": null,
+      "notCoveredCorrect": true,
+      "activities": [],
+      "videos": [],
+      "expectedVideoSegment": null,
+      "videoSegmentHit": null,
+      "videosAllMapped": true,
+      "citation": null,
+      "citationLanguageCorrect": true,
+      "grounded": "not_covered",
+      "topSimilarity": 0.8501,
+      "coverage": 0.25,
+      "answerLanguageCorrect": true,
+      "ms": 47,
+      "error": null
+    },
+    {
+      "id": "nd-he-02",
+      "lang": "he",
+      "type": "near_domain",
+      "question": "כמה שעות שינה צריך תינוק בן שנה?",
+      "expected": [],
+      "retrieved": null,
+      "top3": [
+        "4.2",
+        "4.6",
+        "6.4"
+      ],
+      "milestoneTop1": null,
+      "milestoneTop3": null,
+      "notCoveredCorrect": true,
+      "activities": [],
+      "videos": [],
+      "expectedVideoSegment": null,
+      "videoSegmentHit": null,
+      "videosAllMapped": true,
+      "citation": null,
+      "citationLanguageCorrect": true,
+      "grounded": "not_covered",
+      "topSimilarity": 0.8456,
+      "coverage": 0.25,
+      "answerLanguageCorrect": true,
+      "ms": 47,
+      "error": null
+    },
+    {
+      "id": "nd-he-03",
+      "lang": "he",
+      "type": "near_domain",
+      "question": "איך מלמדים ילד בן ארבע לקרוא אותיות?",
+      "expected": [],
+      "retrieved": null,
+      "top3": [
+        "7.5",
+        "8.1",
+        "8.2"
+      ],
+      "milestoneTop1": null,
+      "milestoneTop3": null,
+      "notCoveredCorrect": true,
+      "activities": [],
+      "videos": [],
+      "expectedVideoSegment": null,
+      "videoSegmentHit": null,
+      "videosAllMapped": true,
+      "citation": null,
+      "citationLanguageCorrect": true,
+      "grounded": "not_covered",
+      "topSimilarity": 0.8538,
+      "coverage": 0.25,
+      "answerLanguageCorrect": true,
+      "ms": 49,
+      "error": null
+    },
+    {
+      "id": "nd-he-04",
+      "lang": "he",
+      "type": "near_domain",
+      "question": "אילו חיסונים מקבל תינוק בגיל שנה?",
+      "expected": [],
+      "retrieved": null,
+      "top3": [
+        "4.9",
+        "2.7",
+        "7.9"
+      ],
+      "milestoneTop1": null,
+      "milestoneTop3": null,
+      "notCoveredCorrect": true,
+      "activities": [],
+      "videos": [],
+      "expectedVideoSegment": null,
+      "videoSegmentHit": null,
+      "videosAllMapped": true,
+      "citation": null,
+      "citationLanguageCorrect": true,
+      "grounded": "not_covered",
+      "topSimilarity": 0.8446,
+      "coverage": 0.25,
+      "answerLanguageCorrect": true,
+      "ms": 42,
+      "error": null
+    },
+    {
+      "id": "nd-he-05",
+      "lang": "he",
+      "type": "near_domain",
+      "question": "מה עושים כשפעוט נושך ילדים אחרים במעון?",
+      "expected": [],
+      "retrieved": null,
+      "top3": [
+        "7.8",
+        "6.2",
+        "5.1"
+      ],
+      "milestoneTop1": null,
+      "milestoneTop3": null,
+      "notCoveredCorrect": true,
+      "activities": [],
+      "videos": [],
+      "expectedVideoSegment": null,
+      "videoSegmentHit": null,
+      "videosAllMapped": true,
+      "citation": null,
+      "citationLanguageCorrect": true,
+      "grounded": "not_covered",
+      "topSimilarity": 0.8575,
+      "coverage": 0.33,
+      "answerLanguageCorrect": true,
+      "ms": 44,
+      "error": null
+    },
+    {
+      "id": "nd-ar-01",
+      "lang": "ar",
+      "type": "near_domain",
+      "question": "كم ساعة يجب أن ينام الرضيع في الليل؟",
+      "expected": [],
+      "retrieved": null,
+      "top3": [
+        "1.4",
+        "3.4",
+        "4.8"
+      ],
+      "milestoneTop1": null,
+      "milestoneTop3": null,
+      "notCoveredCorrect": true,
+      "activities": [],
+      "videos": [],
+      "expectedVideoSegment": null,
+      "videoSegmentHit": null,
+      "videosAllMapped": true,
+      "citation": null,
+      "citationLanguageCorrect": true,
+      "grounded": "not_covered",
+      "topSimilarity": 0.8342,
+      "coverage": 0,
+      "answerLanguageCorrect": true,
+      "ms": 42,
+      "error": null
+    },
+    {
+      "id": "nd-ar-02",
+      "lang": "ar",
+      "type": "near_domain",
+      "question": "كيف أخفّض حرارة الطفل المرتفعة؟",
+      "expected": [],
+      "retrieved": null,
+      "top3": [
+        "7.8",
+        "7.6",
+        "8.5"
+      ],
+      "milestoneTop1": null,
+      "milestoneTop3": null,
+      "notCoveredCorrect": true,
+      "activities": [],
+      "videos": [],
+      "expectedVideoSegment": null,
+      "videoSegmentHit": null,
+      "videosAllMapped": true,
+      "citation": null,
+      "citationLanguageCorrect": true,
+      "grounded": "not_covered",
+      "topSimilarity": 0.8478,
+      "coverage": 0,
+      "answerLanguageCorrect": true,
+      "ms": 47,
+      "error": null
+    },
+    {
+      "id": "xl-01",
+      "lang": "he",
+      "type": "cross_language",
+      "question": "كيف أشجّع الطفل على الأكل بالملعقة؟",
+      "expected": [
+        "6.4"
+      ],
+      "retrieved": "6.4",
+      "top3": [
+        "6.4",
+        "4.6",
+        "1.4"
+      ],
+      "milestoneTop1": true,
+      "milestoneTop3": true,
+      "notCoveredCorrect": true,
+      "activities": [
+        "6.4-E5",
+        "6.4-E2",
+        "6.4-E1"
+      ],
+      "videos": [
+        "6.4.1:hbwZDos4Ag0:he/educator",
+        "6.4.1:9paq8rjxuRU:he/parent",
+        "6.4.2:UeJgGcV7AZ8:he/educator",
+        "6.4.2:MkzJS5DLg9w:he/parent"
+      ],
+      "expectedVideoSegment": null,
+      "videoSegmentHit": null,
+      "videosAllMapped": true,
+      "citation": "handbook-he p.88",
+      "citationLanguageCorrect": true,
+      "grounded": "extractive",
+      "topSimilarity": 0.8987,
+      "coverage": 0.33,
+      "answerLanguageCorrect": true,
+      "ms": 90,
+      "error": null
+    },
+    {
+      "id": "xl-02",
+      "lang": "ar",
+      "type": "cross_language",
+      "question": "איך מלמדים פעוט לעלות במדרגות?",
+      "expected": [
+        "6.3",
+        "7.6"
+      ],
+      "retrieved": "7.6",
+      "top3": [
+        "7.6",
+        "6.3",
+        "7.5"
+      ],
+      "milestoneTop1": true,
+      "milestoneTop3": true,
+      "notCoveredCorrect": true,
+      "activities": [
+        "7.6-E14",
+        "7.6-E6",
+        "7.6-E3"
+      ],
+      "videos": [
+        "7.6.1:P1-iHO4_cxQ:ar/educator",
+        "7.6.2:D3f-0sqpxoU:ar/educator",
+        "7.6.3:ipG3d0Jv41A:ar/educator",
+        "7.6.4:2lcwb8gNVWk:ar/educator"
+      ],
+      "expectedVideoSegment": null,
+      "videoSegmentHit": null,
+      "videosAllMapped": true,
+      "citation": "handbook-ar p.112",
+      "citationLanguageCorrect": true,
+      "grounded": "extractive",
+      "topSimilarity": 0.8803,
+      "coverage": 0.67,
+      "answerLanguageCorrect": true,
+      "ms": 105,
+      "error": null
+    }
+  ]
+}

@@ -1,0 +1,72 @@
+@import "tailwindcss";
+
+/*
+ * Calm early-childhood palette: pastel pink, light blue, soft sage on white.
+ * Layout uses logical properties (ms/me/ps/pe, start/end) so RTL works without
+ * mirroring hacks; technical identifiers are isolated with <bdi dir="ltr">.
+ */
+@theme {
+  --color-blush-50: #fff5f8;
+  --color-blush-100: #fde7ee;
+  --color-blush-200: #f9cfdc;
+  --color-blush-500: #e0789a;
+  --color-blush-700: #a8406a;
+  --color-sky-50: #f3f9fe;
+  --color-sky-100: #e1f0fb;
+  --color-sky-200: #c3e0f6;
+  --color-sky-500: #5a9fd4;
+  --color-sky-700: #2f6b9a;
+  --color-sage-50: #f4f8f3;
+  --color-sage-100: #e3eee1;
+  --color-sage-200: #c8dcc4;
+  --color-sage-500: #74a06c;
+  --color-sage-700: #44663f;
+  --color-ink: #2d3142;
+  --color-muted: #6b7081;
+  --font-sans: "Segoe UI", system-ui, -apple-system, "Noto Sans Hebrew", "Noto Sans Arabic", "Arial Hebrew", "Geeza Pro", Tahoma, Arial, sans-serif;
+  --radius-card: 1.25rem;
+}
+
+:root {
+  color-scheme: light;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-padding-top: 4.5rem;
+}
+
+body {
+  background: linear-gradient(180deg, var(--color-blush-50) 0%, #ffffff 30%, var(--color-sky-50) 100%);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  min-height: 100dvh;
+}
+
+/* Arabic reads better slightly larger with more line height */
+html[lang="ar"] body {
+  font-size: 1.04rem;
+  line-height: 1.75;
+}
+
+.prose-rtl p {
+  line-height: 1.7;
+}
+
+/* bottom navigation clears the iOS home indicator */
+.safe-bottom {
+  padding-bottom: max(0.5rem, env(safe-area-inset-bottom));
+}
+
+:focus-visible {
+  outline: 3px solid var(--color-sky-500);
+  outline-offset: 2px;
+  border-radius: 0.5rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
+  }
+}

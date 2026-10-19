@@ -1,0 +1,482 @@
+{
+  "_about": "Evaluation set. 'expected' lists the acceptable milestone codes (from the handbook titles, not from system output); the first is the primary target. 'expectedVideoSegment' is a sub-milestone whose Excel video should be highlighted. 'expectNotCovered' marks off-topic controls.",
+  "cases": [
+    {
+      "id": "he-01",
+      "lang": "he",
+      "q": "איך לעודד תינוק לעקוב במבט אחרי חפצים?",
+      "expected": [
+        "1.1",
+        "2.1"
+      ],
+      "type": "broad"
+    },
+    {
+      "id": "he-02",
+      "lang": "he",
+      "q": "התינוק לא מגיב לקולות, איך אפשר לעודד תגובה לקול אדם?",
+      "expected": [
+        "1.2",
+        "2.2"
+      ],
+      "type": "specific"
+    },
+    {
+      "id": "he-03",
+      "lang": "he",
+      "q": "איך לעודד חיוך חברתי אצל תינוק בן חודשיים?",
+      "expected": [
+        "1.3"
+      ],
+      "type": "specific"
+    },
+    {
+      "id": "he-04",
+      "lang": "he",
+      "q": "תינוק בן חודש וחצי מתקשה להרים את הראש בשכיבה על הבטן",
+      "expected": [
+        "1.4",
+        "2.7"
+      ],
+      "type": "specific"
+    },
+    {
+      "id": "he-05",
+      "lang": "he",
+      "q": "פעילויות להבאת הידיים לקו האמצע ושילוב אצבעות",
+      "expected": [
+        "2.5"
+      ],
+      "type": "specific"
+    },
+    {
+      "id": "he-06",
+      "lang": "he",
+      "q": "איך לעודד תינוק לאחוז חפץ ולהושיט יד אליו?",
+      "expected": [
+        "2.6"
+      ],
+      "type": "specific"
+    },
+    {
+      "id": "he-07",
+      "lang": "he",
+      "q": "תינוק בן 7 חודשים, איך לעודד העברת חפץ מיד ליד?",
+      "expected": [
+        "3.1"
+      ],
+      "type": "specific"
+    },
+    {
+      "id": "he-08",
+      "lang": "he",
+      "q": "התינוק נרתע מאנשים זרים ובוכה, מה עושים במעון?",
+      "expected": [
+        "3.3"
+      ],
+      "type": "specific"
+    },
+    {
+      "id": "he-09",
+      "lang": "he",
+      "q": "איך לעודד התהפכות מהגב לבטן?",
+      "expected": [
+        "3.4"
+      ],
+      "type": "specific"
+    },
+    {
+      "id": "he-10",
+      "lang": "he",
+      "q": "איך לעודד תינוק לזחול?",
+      "expected": [
+        "4.2"
+      ],
+      "type": "specific"
+    },
+    {
+      "id": "he-11",
+      "lang": "he",
+      "q": "התינוק לא מגיב כשקוראים לו בשמו",
+      "expected": [
+        "4.4"
+      ],
+      "type": "specific"
+    },
+    {
+      "id": "he-12",
+      "lang": "he",
+      "q": "אילו פעילויות מחזקות תפיסת צבת?",
+      "expected": [
+        "4.7"
+      ],
+      "type": "specific"
+    },
+    {
+      "id": "he-13",
+      "lang": "he",
+      "q": "איך לעודד תינוק לשבת בכוחות עצמו?",
+      "expected": [
+        "4.9"
+      ],
+      "type": "specific"
+    },
+    {
+      "id": "he-14",
+      "lang": "he",
+      "q": "פעוט בן 14 חודשים שעדיין לא הולך בתמיכה, מה אפשר לעשות?",
+      "expected": [
+        "5.4",
+        "5.3"
+      ],
+      "type": "specific"
+    },
+    {
+      "id": "he-15",
+      "lang": "he",
+      "q": "איך לעודד פעוט להצביע על חפצים מוכרים כשמבקשים ממנו?",
+      "expected": [
+        "5.5"
+      ],
+      "type": "specific"
+    },
+    {
+      "id": "he-16",
+      "lang": "he",
+      "q": "משחקים של הכנסת קובייה לתוך כוס",
+      "expected": [
+        "5.7"
+      ],
+      "type": "specific"
+    },
+    {
+      "id": "he-17",
+      "lang": "he",
+      "q": "איך ללמד פעוט להכיר את חלקי הגוף?",
+      "expected": [
+        "6.1"
+      ],
+      "type": "specific"
+    },
+    {
+      "id": "he-18",
+      "lang": "he",
+      "q": "איך לעודד פעוט לאכול לבד עם כפית?",
+      "expected": [
+        "6.4"
+      ],
+      "type": "specific"
+    },
+    {
+      "id": "he-19",
+      "lang": "he",
+      "q": "פעילויות לבניית מגדל מקוביות",
+      "expected": [
+        "6.5"
+      ],
+      "type": "specific"
+    },
+    {
+      "id": "he-20",
+      "lang": "he",
+      "q": "ילד בן שנתיים וחצי שעדיין לא מחבר שתי מילים למשפט",
+      "expected": [
+        "7.4"
+      ],
+      "type": "specific"
+    },
+    {
+      "id": "he-21",
+      "lang": "he",
+      "q": "איך לעודד משחק סימבולי ומשחק דמיון?",
+      "expected": [
+        "7.9"
+      ],
+      "type": "specific"
+    },
+    {
+      "id": "he-22",
+      "lang": "he",
+      "q": "ילד בן שלוש לא מצליח לקפוץ ממדרגה",
+      "expected": [
+        "8.3"
+      ],
+      "type": "specific"
+    },
+    {
+      "id": "he-23",
+      "lang": "he",
+      "q": "איך לעזור לילד בן שלוש להתלבש לבד?",
+      "expected": [
+        "8.4"
+      ],
+      "type": "specific"
+    },
+    {
+      "id": "he-24",
+      "lang": "he",
+      "q": "תרגול העתקת עיגול וסימן פלוס",
+      "expected": [
+        "8.5",
+        "7.8"
+      ],
+      "type": "specific"
+    },
+    {
+      "id": "he-25",
+      "lang": "he",
+      "q": "מה אפשר לעשות עם ילד בן שנתיים שמתקשה לדבר?",
+      "expected": [
+        "7.4",
+        "7.1",
+        "7.3",
+        "6.7",
+        "8.2"
+      ],
+      "type": "broad"
+    },
+    {
+      "id": "he-26",
+      "lang": "he",
+      "q": "אילו משחקים יכולים לשפר מוטוריקה עדינה?",
+      "expected": [
+        "4.1",
+        "4.7",
+        "5.7",
+        "6.5",
+        "7.8",
+        "8.5",
+        "3.1",
+        "2.5",
+        "2.6"
+      ],
+      "type": "broad"
+    },
+    {
+      "id": "he-27",
+      "lang": "he",
+      "q": "שימוש בצעצועים בולטים ומושכי עין לתינוק",
+      "expected": [
+        "1.1"
+      ],
+      "expectedVideoSegment": "1.1.3",
+      "type": "video"
+    },
+    {
+      "id": "he-28",
+      "lang": "he",
+      "q": "איך מלמדים פעוט לעלות במדרגות?",
+      "expected": [
+        "6.3",
+        "7.6"
+      ],
+      "type": "specific"
+    },
+    {
+      "id": "he-29",
+      "lang": "he",
+      "q": "מה המתכון לעוגת שוקולד?",
+      "expected": [],
+      "expectNotCovered": true,
+      "type": "off_topic"
+    },
+    {
+      "id": "he-30",
+      "lang": "he",
+      "q": "איך מחליפים צמיג ברכב?",
+      "expected": [],
+      "expectNotCovered": true,
+      "type": "off_topic"
+    },
+    {
+      "id": "ar-01",
+      "lang": "ar",
+      "q": "ما الأنشطة التي تساعد الرضيع على متابعة الأشياء بعينيه؟",
+      "expected": [
+        "1.1",
+        "2.1"
+      ],
+      "type": "broad"
+    },
+    {
+      "id": "ar-02",
+      "lang": "ar",
+      "q": "كيف أساعد طفلاً عمره سنتان على تطوير اللغة؟",
+      "expected": [
+        "7.4",
+        "7.1",
+        "7.3",
+        "6.7",
+        "8.2"
+      ],
+      "type": "broad"
+    },
+    {
+      "id": "ar-03",
+      "lang": "ar",
+      "q": "كيف أشجّع الطفل على الأكل بالملعقة؟",
+      "expected": [
+        "6.4"
+      ],
+      "type": "specific"
+    },
+    {
+      "id": "ar-04",
+      "lang": "ar",
+      "q": "كيف أساعد الرضيع على الحبو؟",
+      "expected": [
+        "4.2"
+      ],
+      "type": "specific"
+    },
+    {
+      "id": "ar-05",
+      "lang": "ar",
+      "q": "طفل عمره ثلاث سنوات لا يستطيع القفز من على درجة",
+      "expected": [
+        "8.3"
+      ],
+      "type": "specific"
+    },
+    {
+      "id": "ar-06",
+      "lang": "ar",
+      "q": "كيف نشجّع اللعب الرمزي عند الأطفال؟",
+      "expected": [
+        "7.9"
+      ],
+      "type": "specific"
+    },
+    {
+      "id": "ar-07",
+      "lang": "ar",
+      "q": "كيف أطوّر قبضة الكماشة عند الرضيع؟",
+      "expected": [
+        "4.7"
+      ],
+      "type": "specific"
+    },
+    {
+      "id": "ar-08",
+      "lang": "ar",
+      "q": "طفل لا يلتفت عندما ننادي باسمه",
+      "expected": [
+        "4.4"
+      ],
+      "type": "specific"
+    },
+    {
+      "id": "ar-09",
+      "lang": "ar",
+      "q": "كيف نشجّع الابتسامة الاجتماعية عند الرضيع؟",
+      "expected": [
+        "1.3"
+      ],
+      "type": "specific"
+    },
+    {
+      "id": "ar-10",
+      "lang": "ar",
+      "q": "كيف أساعد الطفل على بناء برج من المكعبات؟",
+      "expected": [
+        "6.5"
+      ],
+      "type": "specific"
+    },
+    {
+      "id": "ar-11",
+      "lang": "ar",
+      "q": "استعمال ألعاب بارزة وملفتة للنظر للرضيع",
+      "expected": [
+        "1.1"
+      ],
+      "expectedVideoSegment": "1.1.3",
+      "type": "video"
+    },
+    {
+      "id": "ar-12",
+      "lang": "ar",
+      "q": "ما هي عاصمة فرنسا؟",
+      "expected": [],
+      "expectNotCovered": true,
+      "type": "off_topic"
+    },
+    {
+      "id": "nd-he-01",
+      "lang": "he",
+      "q": "איך מורידים חום גבוה לתינוק?",
+      "expected": [],
+      "expectNotCovered": true,
+      "type": "near_domain"
+    },
+    {
+      "id": "nd-he-02",
+      "lang": "he",
+      "q": "כמה שעות שינה צריך תינוק בן שנה?",
+      "expected": [],
+      "expectNotCovered": true,
+      "type": "near_domain"
+    },
+    {
+      "id": "nd-he-03",
+      "lang": "he",
+      "q": "איך מלמדים ילד בן ארבע לקרוא אותיות?",
+      "expected": [],
+      "expectNotCovered": true,
+      "type": "near_domain"
+    },
+    {
+      "id": "nd-he-04",
+      "lang": "he",
+      "q": "אילו חיסונים מקבל תינוק בגיל שנה?",
+      "expected": [],
+      "expectNotCovered": true,
+      "type": "near_domain"
+    },
+    {
+      "id": "nd-he-05",
+      "lang": "he",
+      "q": "מה עושים כשפעוט נושך ילדים אחרים במעון?",
+      "expected": [],
+      "expectNotCovered": true,
+      "type": "near_domain"
+    },
+    {
+      "id": "nd-ar-01",
+      "lang": "ar",
+      "q": "كم ساعة يجب أن ينام الرضيع في الليل؟",
+      "expected": [],
+      "expectNotCovered": true,
+      "type": "near_domain"
+    },
+    {
+      "id": "nd-ar-02",
+      "lang": "ar",
+      "q": "كيف أخفّض حرارة الطفل المرتفعة؟",
+      "expected": [],
+      "expectNotCovered": true,
+      "type": "near_domain"
+    },
+    {
+      "id": "xl-01",
+      "lang": "he",
+      "q": "كيف أشجّع الطفل على الأكل بالملعقة؟",
+      "expected": [
+        "6.4"
+      ],
+      "type": "cross_language",
+      "_note": "Hebrew selected, question typed in Arabic: answer must come from the Hebrew handbook"
+    },
+    {
+      "id": "xl-02",
+      "lang": "ar",
+      "q": "איך מלמדים פעוט לעלות במדרגות?",
+      "expected": [
+        "6.3",
+        "7.6"
+      ],
+      "type": "cross_language",
+      "_note": "Arabic selected, question typed in Hebrew"
+    }
+  ]
+}

@@ -20,6 +20,7 @@
     "smoke": "tsx scripts/smoke.ts",
     "icons": "node scripts/generate-icons.mjs",
     "eval": "tsx scripts/eval.ts",
+    "questions:check": "tsx scripts/check-question-bank.ts",
     "test": "vitest run --project unit",
     "test:integration": "vitest run --project integration",
     "test:db:prepare": "tsx scripts/test-db-prepare.ts",

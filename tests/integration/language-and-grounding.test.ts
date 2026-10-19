@@ -30,6 +30,7 @@ describe("Hebrew videos and strict language", () => {
     const a = await ask("שימוש בצעצועים בולטים ומושכי עין לתינוק", "he");
     expect(a.milestone?.code).toBe("1.1");
     expectSingleLanguage(a, "he");
+    expect(a.videos).toHaveLength(1);
     const v = a.videos.find((x) => x.videoId === "j312B6F7PUI"); // סדרה 1!E4 (educator, 1.1.3)
     expect(v).toMatchObject({ activityCode: "1.1.3", audience: "educator", language: "he", highlighted: true, canonicalUrl: "https://youtu.be/j312B6F7PUI" });
     expect(a.videos.some((x) => x.videoId === "e4RsJQ4yJMo")).toBe(false); // the Arabic 1.1.3 video

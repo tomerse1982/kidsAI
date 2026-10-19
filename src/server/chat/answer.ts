@@ -4,13 +4,14 @@
  *   detect language -> parse age -> hybrid retrieval (milestones)
  *   -> SQL: milestone details, handbook exercises, page references
  *   -> Claude (or extractive fallback) picks activities + writes a short explanation
- *   -> SQL: videos mapped to the chosen milestone / sub-milestones (Excel mapping)
+ *   -> SQL: videos mapped to the chosen milestone / sub-milestones (Excel mapping) -> one video per answer
  *
  * The model never produces milestone codes, video ids or URLs that are shown
  * unvalidated: every code it returns must be one it was given.
  */
 import { createHash } from "node:crypto";
 import { parseAge, type ParsedAge } from "@/lib/age-parse";
+import { selectAnswerVideo } from "@/lib/answer-video";
 import { detectLanguage } from "@/lib/text-normalize";
 import { composeAnswer, llmEnabled, LlmUnavailableError, type GroundingExcerpt } from "@/server/ai/llm";
 import { logger } from "@/server/logger";
@@ -35,6 +36,7 @@ export interface ChatAnswer {
   milestone: MilestoneDetails | null;
   relatedMilestones: MilestoneSummary[];
   activities: ExerciseItem[];
+  /** At most one video, in the selected language (see selectAnswerVideo). */
   videos: (VideoItem & { highlighted: boolean })[];
   videoMatch: "activity" | "milestone" | "none";
   /** Message shown when no displayable video exists in the selected language (no substitute is shown). */
@@ -244,10 +246,9 @@ export async function answerQuestion(
   const linkedSegments = chosen.flatMap((e) => e.relatedSegments.map((s) => s.code));
   const focusSegments = [...new Set([...segmentHits.slice(0, 2), ...linkedSegments])];
   const allVideos = await getMappedVideos(db, milestone.code, { language: lang });
-  const focus = new Set(focusSegments);
-  const videos = allVideos
-    .map((v) => ({ ...v, highlighted: v.activityCode !== null && focus.has(v.activityCode) }))
-    .sort((a, b) => Number(b.highlighted) - Number(a.highlighted) || (a.sequence ?? 0) - (b.sequence ?? 0));
+  // one video per answer: the most relevant sub-milestone's educator version, else the milestone's first video
+  const picked = selectAnswerVideo(allVideos, focusSegments);
+  const videos = picked ? [{ ...picked.video, highlighted: picked.highlighted }] : [];
 
   const activityRefs = await getSourceReferences(db, milestone.code, lang, { activityCodes: chosen.map((c) => c.code) });
   const sources = [...milestone.sources, ...activityRefs.filter((r) => r.activityCode)];

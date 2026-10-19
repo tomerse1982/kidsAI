@@ -113,7 +113,9 @@ describe("workbook with an unknown layout (synthetic Hebrew file, admin column m
 
   it("shows the Hebrew video in a Hebrew chat answer", async () => {
     const a = await answerQuestion(testDb(), { question: "צעצועים בולטים ומושכי עין לתינוק", uiLanguage: "he", clientId: "33333333-3333-4333-8333-333333333333" });
-    expect(a.videos.some((v) => v.videoId === "HEBtest1130")).toBe(true);
-    expect(a.videos.every((v) => v.language === "he")).toBe(true);
+    // one video per answer: a Hebrew educator version of 1.1.3 (synthetic or from the real Hebrew workbook)
+    expect(a.videos).toHaveLength(1);
+    expect(a.videos[0]).toMatchObject({ activityCode: "1.1.3", audience: "educator", language: "he", highlighted: true });
+    expect(["HEBtest1130", "j312B6F7PUI"]).toContain(a.videos[0].videoId);
   });
 });

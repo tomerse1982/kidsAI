@@ -33,10 +33,21 @@ describe("bilingual retrieval and answers", () => {
 
   it("prioritises the specific sub-milestone video (1.1.3) in the selected language only", async () => {
     const a = await ask("צעצועים בולטים ומושכי עין לתינוק");
-    const v = a.videos.find((x) => x.activityCode === "1.1.3" && x.audience === "educator");
-    expect(v).toMatchObject({ videoId: "j312B6F7PUI", language: "he", highlighted: true });
-    expect(a.videos[0].highlighted).toBe(true);
-    expect(a.videos.every((x) => x.language === "he")).toBe(true);
+    // one video per answer: the educator version only (the parent version P.1.1.3 is not added)
+    expect(a.videos).toHaveLength(1);
+    expect(a.videos[0]).toMatchObject({ videoId: "j312B6F7PUI", activityCode: "1.1.3", audience: "educator", language: "he", highlighted: true });
+  });
+
+  it("returns exactly one video per answer in Hebrew and in Arabic", async () => {
+    for (const [q, lang] of [
+      ["איך לעודד תינוק לעקוב במבט אחרי חפצים?", "he"], ["איך לעודד פעוט לאכול לבד עם כפית?", "he"],
+      ["استعمال ألعاب بارزة وملفتة للنظر للرضيع", "ar"], ["كيف أشجّع الطفل على الأكل بالملعقة؟", "ar"],
+    ] as const) {
+      const a = await ask(q, lang);
+      expect(a.status, q).toBe("answered");
+      expect(a.videos, q).toHaveLength(1);
+      expect(a.videos[0].language, q).toBe(lang);
+    }
   });
 
   it("returns only videos that exist in the mapping table for the chosen milestone", async () => {

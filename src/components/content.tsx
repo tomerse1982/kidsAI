@@ -87,8 +87,11 @@ export function VideoCard({ video, lang, highlighted }: { video: VideoItem; lang
 export function VideoList({ videos, lang, highlightedIds = [], notice }: { videos: VideoItem[]; lang: Lang; highlightedIds?: string[]; notice?: string | null }) {
   const d = t(lang);
   if (!videos.length) return <p className="rounded-xl bg-sky-50 p-3 text-sm text-muted" data-testid="no-video-notice">{notice ?? d.noVideos}</p>;
-  const main = videos.filter((v) => v.audience !== "parent" || highlightedIds.includes(v.videoId));
-  const parents = videos.filter((v) => v.audience === "parent" && !highlightedIds.includes(v.videoId));
+  // a highlighted parent version moves up only when its sub-milestone has no other version in the main grid
+  const hasMainVersion = (p: VideoItem) => videos.some((v) => v.audience !== "parent" && v.activityCode === p.activityCode);
+  const promoted = (v: VideoItem) => highlightedIds.includes(v.videoId) && !hasMainVersion(v);
+  const main = videos.filter((v) => v.audience !== "parent" || promoted(v));
+  const parents = videos.filter((v) => v.audience === "parent" && !promoted(v));
   const grid = (list: VideoItem[]) => (
     <div className="grid gap-3 sm:grid-cols-2">
       {list.map((v) => <VideoCard key={v.videoId} video={v} lang={lang} highlighted={highlightedIds.includes(v.videoId)} />)}

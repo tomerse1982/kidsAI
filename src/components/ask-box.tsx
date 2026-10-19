@@ -4,6 +4,7 @@ import { Send } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useState, useSyncExternalStore } from "react";
 import { t, type Lang } from "@/lib/i18n";
+import { QuestionSuggestList, useQuestionSuggest } from "./question-suggest";
 import { Button } from "./ui/primitives";
 
 const RECENT_KEY = "kidsai.recent";
@@ -34,6 +35,8 @@ export function AskBox({ lang }: { lang: Lang }) {
     if (v.length < 2) return;
     router.push(`/chat?q=${encodeURIComponent(v)}`);
   };
+  // choosing a suggestion fills the field and asks it right away
+  const suggestions = useQuestionSuggest({ lang, value: q, onPick: (text) => { setQ(text); submit(text); } });
   return (
     <form
       onSubmit={(e) => {
@@ -43,23 +46,28 @@ export function AskBox({ lang }: { lang: Lang }) {
       className="rounded-[1.5rem] bg-white p-2 shadow-[0_6px_24px_rgba(90,159,212,0.18)] ring-1 ring-sky-100"
     >
       <label htmlFor="ask" className="sr-only">{d.askPlaceholder}</label>
-      <textarea
-        id="ask"
-        data-testid="home-question"
-        value={q}
-        onChange={(e) => setQ(e.target.value)}
-        onKeyDown={(e) => {
-          if (e.key === "Enter" && !e.shiftKey) {
-            e.preventDefault();
-            submit(q);
-          }
-        }}
-        rows={3}
-        maxLength={600}
-        placeholder={d.askPlaceholder}
-        enterKeyHint="send"
-        className="w-full resize-none rounded-2xl bg-transparent p-3 text-lg outline-none placeholder:text-muted/70"
-      />
+      <div className="relative">
+        <textarea
+          id="ask"
+          data-testid="home-question"
+          value={q}
+          onChange={(e) => setQ(e.target.value)}
+          {...suggestions.inputProps}
+          onKeyDown={(e) => {
+            if (suggestions.onKeyDown(e)) return;
+            if (e.key === "Enter" && !e.shiftKey) {
+              e.preventDefault();
+              submit(q);
+            }
+          }}
+          rows={3}
+          maxLength={600}
+          placeholder={d.askPlaceholder}
+          enterKeyHint="send"
+          className="w-full resize-none rounded-2xl bg-transparent p-3 text-lg outline-none placeholder:text-muted/70"
+        />
+        <QuestionSuggestList lang={lang} s={suggestions} />
+      </div>
       <div className="flex items-center justify-between gap-2 px-2 pb-1">
         <p className="text-xs text-muted">{d.privacyNote}</p>
         <Button type="submit" size="lg" disabled={q.trim().length < 2} data-testid="home-ask">

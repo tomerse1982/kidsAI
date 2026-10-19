@@ -7,6 +7,7 @@ import { t, type Lang } from "@/lib/i18n";
 import type { ChatAnswer } from "@/server/chat/answer";
 import { pushRecent } from "./ask-box";
 import { ActivityCard, BookmarkButton, MilestoneCard, SourceCard, VideoList } from "./content";
+import { QuestionSuggestList, useQuestionSuggest } from "./question-suggest";
 import { Button, Card, Code, SectionTitle } from "./ui/primitives";
 
 type Turn = { id: string; question: string; answer?: ChatAnswer; error?: string };
@@ -161,6 +162,9 @@ export function ChatClient({ lang }: { lang: Lang }) {
     endRef.current?.scrollIntoView({ behavior: "smooth", block: "end" });
   }, [turns]);
 
+  // choosing a suggestion asks it right away (ask() clears the field)
+  const suggestions = useQuestionSuggest({ lang, value: input, onPick: (q) => void ask(q) });
+
   return (
     <div className="flex flex-col gap-5">
       <div className="flex items-center justify-between">
@@ -193,18 +197,26 @@ export function ChatClient({ lang }: { lang: Lang }) {
         className="sticky bottom-20 z-20 flex items-end gap-2 rounded-[1.5rem] bg-white p-2 shadow-[0_6px_24px_rgba(45,49,66,0.12)] ring-1 ring-sky-100"
       >
         <label htmlFor="chat-input" className="sr-only">{d.askPlaceholder}</label>
-        <textarea
-          id="chat-input"
-          data-testid="chat-input"
-          value={input}
-          onChange={(e) => setInput(e.target.value)}
-          onKeyDown={(e) => { if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); void ask(input); } }}
-          rows={1}
-          maxLength={600}
-          placeholder={d.askPlaceholder}
-          enterKeyHint="send"
-          className="max-h-32 min-h-11 flex-1 resize-none bg-transparent px-3 py-2.5 outline-none"
-        />
+        <div className="relative flex-1">
+          <textarea
+            id="chat-input"
+            data-testid="chat-input"
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+            {...suggestions.inputProps}
+            onKeyDown={(e) => {
+              if (suggestions.onKeyDown(e)) return;
+              if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); void ask(input); }
+            }}
+            rows={1}
+            maxLength={600}
+            placeholder={d.askPlaceholder}
+            enterKeyHint="send"
+            className="block max-h-32 min-h-11 w-full resize-none bg-transparent px-3 py-2.5 outline-none"
+          />
+          {/* the field sits at the bottom of the screen: suggestions open upwards */}
+          <QuestionSuggestList lang={lang} s={suggestions} placement="above" />
+        </div>
         <Button type="submit" size="icon" disabled={busy || input.trim().length < 2} aria-label={d.ask} data-testid="chat-send">
           {busy ? <Loader2 className="animate-spin" size={18} aria-hidden /> : <Send size={18} aria-hidden className="rtl:-scale-x-100" />}
         </Button>

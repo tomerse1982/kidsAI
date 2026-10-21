@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { z } from "zod";
+import { clientCookieOptions } from "@/lib/framing";
 import { answerQuestion } from "@/server/chat/answer";
 import { prisma } from "@/server/db";
 import { CLIENT_COOKIE, getClientId, handle, jsonError, rateLimit } from "@/server/http";
@@ -19,6 +20,6 @@ export const POST = handle(async (req: Request) => {
   if (!limit.ok) return jsonError(429, "rate_limited", "Too many questions, please wait a moment", { retryAfter: limit.retryAfter });
   const answer = await answerQuestion(prisma, { question: body.question, uiLanguage: body.language, clientId, conversationId: body.conversationId });
   const res = NextResponse.json(answer);
-  res.cookies.set(CLIENT_COOKIE, clientId, { httpOnly: true, sameSite: "lax", secure: process.env.NODE_ENV === "production", path: "/", maxAge: 31536000 });
+  res.cookies.set(CLIENT_COOKIE, clientId, clientCookieOptions());
   return res;
 });

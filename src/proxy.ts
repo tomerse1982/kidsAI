@@ -1,4 +1,5 @@
 import { NextResponse, type NextRequest } from "next/server";
+import { allowedFrameAncestors, clientCookieOptions } from "@/lib/framing";
 import { checkSitePassword, PUBLIC_PATHS } from "@/lib/site-auth";
 
 const CLIENT_COOKIE = "kidsai_cid";
@@ -29,14 +30,13 @@ export function proxy(request: NextRequest) {
   }
   const response = NextResponse.next();
   if (!request.cookies.get(CLIENT_COOKIE)) {
-    response.cookies.set(CLIENT_COOKIE, crypto.randomUUID(), {
-      httpOnly: true, sameSite: "lax", secure: process.env.NODE_ENV === "production", path: "/", maxAge: 60 * 60 * 24 * 365,
-    });
+    response.cookies.set(CLIENT_COOKIE, crypto.randomUUID(), clientCookieOptions());
   }
   response.headers.set("X-Content-Type-Options", "nosniff");
   response.headers.set("Referrer-Policy", "strict-origin-when-cross-origin");
   response.headers.set("Permissions-Policy", "camera=(), microphone=(), geolocation=()");
-  if (!pathname.startsWith("/api/sources")) response.headers.set("X-Frame-Options", "DENY");
+  // framing allowed for configured hosts only (CSP frame-ancestors in next.config.ts); X-Frame-Options cannot express a list
+  if (!pathname.startsWith("/api/sources") && !allowedFrameAncestors()) response.headers.set("X-Frame-Options", "DENY");
   return response;
 }
 

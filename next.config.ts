@@ -1,4 +1,5 @@
 import type { NextConfig } from "next";
+import { allowedFrameAncestors } from "./src/lib/framing";
 
 const nextConfig: NextConfig = {
   // Native / WASM-backed packages are loaded by Node at runtime, not bundled.
@@ -24,7 +25,8 @@ const nextConfig: NextConfig = {
               "script-src 'self' 'unsafe-inline'" + (process.env.NODE_ENV === "production" ? "" : " 'unsafe-eval'"),
               "style-src 'self' 'unsafe-inline'",
               "connect-src 'self'",
-              "frame-ancestors 'self'",
+              // headers are compiled at build time: ALLOWED_FRAME_ANCESTORS must be set for `next build` too
+              `frame-ancestors 'self'${allowedFrameAncestors() ? " " + allowedFrameAncestors() : ""}`,
               "base-uri 'self'",
               "form-action 'self'",
             ].join("; "),

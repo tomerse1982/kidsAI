@@ -13,6 +13,8 @@ const nextConfig: NextConfig = {
         source: "/:path*",
         headers: [
           { key: "Strict-Transport-Security", value: "max-age=63072000; includeSubDomains" },
+          // private deployment: also covers PDFs and API responses, which have no <meta> tag
+          { key: "X-Robots-Tag", value: "noindex, nofollow" },
           {
             key: "Content-Security-Policy",
             value: [

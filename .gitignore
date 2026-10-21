@@ -50,5 +50,6 @@ next-env.d.ts
 __pycache__/
 /src/generated/
 /models/
-/source-files/
+/source-files/*
+!/source-files/*.pdf
 .pytest_cache/

@@ -14,7 +14,8 @@ export const GET = handle(async (_req: Request, ctx: { params: Promise<{ key: st
   const doc = await prisma.sourceDocument.findUnique({ where: { documentKey: key } });
   if (!doc || doc.sourceType !== "PDF") return jsonError(404, "not_found");
   // only files inside the configured source / upload directories are ever served
-  const file = path.resolve(doc.storagePath);
+  // paths recorded on Windows use "\": normalise so the same database works on a Linux host
+  const file = path.resolve(doc.storagePath.replace(/[\\/]/g, path.sep));
   const allowed = [path.resolve(process.env.SOURCE_FILES_DIR ?? "./source-files"), path.resolve(process.env.UPLOAD_DIR ?? "./storage/uploads")];
   if (!allowed.some((dir) => file.startsWith(dir + path.sep))) return jsonError(404, "not_found");
   const info = await stat(file);

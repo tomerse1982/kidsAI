@@ -12,6 +12,7 @@ export async function generateMetadata(): Promise<Metadata> {
     title: { default: `${d.appName} | ${d.appNameOther}`, template: `%s · ${d.appName}` },
     description: d.tagline,
     applicationName: d.appName,
+    robots: { index: false, follow: false },
     appleWebApp: { capable: true, title: d.appName, statusBarStyle: "default" },
     icons: { icon: [{ url: "/icons/icon.svg", type: "image/svg+xml" }, { url: "/icons/icon-192.png", sizes: "192x192" }], apple: "/icons/apple-touch-icon.png" },
   };

@@ -1,6 +1,7 @@
 # Image for the private Hugging Face Docker Space.
 # .github/workflows/deploy-huggingface.yml copies it to the root of the Space with the code.
-# Secrets (DATABASE_URL, SESSION_SECRET, ...) are set in the Space settings, never here.
+# Secrets are set in the Space settings, never here: DATABASE_URL (Neon pooled URL, used by the app),
+# DATABASE_URL_UNPOOLED (Neon direct URL, used by prisma migrate at start), SESSION_SECRET.
 FROM node:24-bookworm-slim
 
 RUN apt-get update && apt-get install -y --no-install-recommends curl ca-certificates \

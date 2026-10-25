@@ -5,6 +5,7 @@
  * disabled so production behaviour never depends on the model hub.
  */
 import path from "node:path";
+import { runtimePath } from "@/lib/runtime-path";
 
 type Extractor = (texts: string[], opts: { pooling: "mean"; normalize: boolean }) => Promise<{ tolist(): number[][] }>;
 
@@ -15,9 +16,9 @@ let extractorPromise: Promise<Extractor> | null = null;
 
 async function loadExtractor(): Promise<Extractor> {
   const { pipeline, env } = await import("@huggingface/transformers");
-  env.localModelPath = path.resolve(process.env.MODEL_DIR ?? "./models") + path.sep;
+  env.localModelPath = runtimePath(process.env.MODEL_DIR, "./models") + path.sep;
   env.allowRemoteModels = false;
-  env.cacheDir = path.resolve(process.env.MODEL_CACHE_DIR ?? "./.cache/models");
+  env.cacheDir = runtimePath(process.env.MODEL_CACHE_DIR, "./.cache/models");
   // ONNX Runtime defaults to one *spinning* worker per logical core. On hybrid
   // (P/E-core) laptops and shared servers that oversubscribes the CPU and makes
   // throughput collapse, so use a small fixed pool without spinning.

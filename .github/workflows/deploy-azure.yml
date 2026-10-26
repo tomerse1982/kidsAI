@@ -1,7 +1,7 @@
 # Push to main -> build the image, push it to ghcr.io, roll the Azure container app to it.
-# The deploy job runs once these are set in the repository settings (Actions):
-#   secrets   AZURE_CLIENT_ID, AZURE_TENANT_ID, AZURE_SUBSCRIPTION_ID  (OIDC, no stored password)
-#   variables AZURE_RESOURCE_GROUP, AZURE_CONTAINER_APP
+# The app is updated once these repository secrets exist (Settings > Secrets and variables > Actions):
+#   AZURE_CLIENT_ID, AZURE_TENANT_ID, AZURE_SUBSCRIPTION_ID  (OIDC, no stored password)
+# Optional variables AZURE_RESOURCE_GROUP / AZURE_CONTAINER_APP override kidsai-rg / kidsai.
 name: Deploy to Azure Container Apps
 
 on:
@@ -44,18 +44,29 @@ jobs:
 
   deploy:
     needs: build
-    if: ${{ vars.AZURE_CONTAINER_APP != '' }}
     runs-on: ubuntu-latest
+    env:
+      AZURE_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
+      RESOURCE_GROUP: ${{ vars.AZURE_RESOURCE_GROUP || 'kidsai-rg' }}
+      CONTAINER_APP: ${{ vars.AZURE_CONTAINER_APP || 'kidsai' }}
     steps:
-      - uses: azure/login@v2
+      - name: Check that the Azure secrets are set
+        id: check
+        run: |
+          if [ -n "$AZURE_CLIENT_ID" ]; then echo "ok=true" >> "$GITHUB_OUTPUT"
+          else echo "::warning::AZURE_CLIENT_ID / AZURE_TENANT_ID / AZURE_SUBSCRIPTION_ID secrets are missing: image built, app not updated"; fi
+      - if: steps.check.outputs.ok == 'true'
+        uses: azure/login@v2
         with:
           client-id: ${{ secrets.AZURE_CLIENT_ID }}
           tenant-id: ${{ secrets.AZURE_TENANT_ID }}
           subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
       - name: Roll the container app to this commit's image
+        if: steps.check.outputs.ok == 'true'
         run: |
           az containerapp update \
-            --name "${{ vars.AZURE_CONTAINER_APP }}" \
-            --resource-group "${{ vars.AZURE_RESOURCE_GROUP }}" \
+            --name "$CONTAINER_APP" \
+            --resource-group "$RESOURCE_GROUP" \
             --image "${{ env.IMAGE }}:${{ github.sha }}" \
             --output none
+          echo "Deployed ${{ env.IMAGE }}:${{ github.sha }}"

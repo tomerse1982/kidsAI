@@ -31,10 +31,10 @@ GitHub → *Settings → Secrets and variables → Actions*:
 | Secret | `AZURE_CLIENT_ID` | client ID of the Entra app `kidsai-github-deploy` |
 | Secret | `AZURE_TENANT_ID` | directory (tenant) ID |
 | Secret | `AZURE_SUBSCRIPTION_ID` | subscription ID |
-| Variable | `AZURE_RESOURCE_GROUP` | `kidsai-rg` |
-| Variable | `AZURE_CONTAINER_APP` | `kidsai` |
+| Variable (optional) | `AZURE_RESOURCE_GROUP` | defaults to `kidsai-rg` |
+| Variable (optional) | `AZURE_CONTAINER_APP` | defaults to `kidsai` |
 
-Without the variables the image is still built, but the app is not updated.
+Without the secrets the image is still built, but the app is not updated (the run shows a warning).
 The deploy identity can only act on the `kidsai-rg` resource group, and only workflows on `main` can use it.
 
 ## Add or remove a person's access

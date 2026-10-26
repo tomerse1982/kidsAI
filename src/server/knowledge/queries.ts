@@ -10,6 +10,7 @@
  */
 import { existsSync } from "node:fs";
 import { compareCodes } from "@/lib/codes";
+import { storedFilePath } from "@/lib/runtime-path";
 import { youTubeUrls } from "@/lib/youtube";
 import type { Prisma as Db } from "@/server/prisma-factory";
 
@@ -131,7 +132,7 @@ export async function handbookStatus(db: Db, lang: Lang): Promise<{ state: Handb
   if (!doc?.currentVersionId) return { state: "not_indexed", title: doc?.title ?? null, documentKey };
   const chunks = await db.knowledgeChunk.count({ where: { sourceVersionId: doc.currentVersionId, language: lang } });
   if (!chunks) return { state: "not_indexed", title: doc.title, documentKey };
-  return { state: fileAvailable(doc.storagePath) ? "available" : "file_unavailable", title: doc.title, documentKey };
+  return { state: fileAvailable(storedFilePath(doc.storagePath)) ? "available" : "file_unavailable", title: doc.title, documentKey };
 }
 
 // ------------------------------------------------------------------ lists ----
@@ -196,7 +197,7 @@ export async function getSourceReferences(db: Db, milestoneCode: string, lang: L
       document: r.sourceVersion.document.title, documentKey: r.sourceVersion.document.documentKey, language: r.language,
       pdfPageIndex: r.pdfPageIndex, printedPage: r.printedPageNumber, heading: r.sectionHeading,
       milestoneCode, activityCode: r.activity?.activityCode ?? null,
-      url: fileAvailable(r.sourceVersion.document.storagePath) ? handbookPageUrl(r.sourceVersion.document.documentKey, r.pdfPageIndex) : null,
+      url: fileAvailable(storedFilePath(r.sourceVersion.document.storagePath)) ? handbookPageUrl(r.sourceVersion.document.documentKey, r.pdfPageIndex) : null,
     }));
 }
 

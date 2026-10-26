@@ -8,3 +8,11 @@ import path from "node:path";
 export function runtimePath(value: string | undefined, fallback: string, ...segments: string[]): string {
   return path.resolve(/* turbopackIgnore: true */ process.cwd(), value || fallback, ...segments);
 }
+
+/**
+ * Absolute path of a file path recorded in the database. Paths imported on Windows use "\",
+ * which is an ordinary character on Linux: normalise both separators so the same data works anywhere.
+ */
+export function storedFilePath(storagePath: string): string {
+  return runtimePath(storagePath.replace(/[\\/]/g, path.sep), ".");
+}

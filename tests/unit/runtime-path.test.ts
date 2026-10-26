@@ -1,6 +1,6 @@
 import path from "node:path";
 import { describe, expect, it } from "vitest";
-import { runtimePath } from "@/lib/runtime-path";
+import { runtimePath, storedFilePath } from "@/lib/runtime-path";
 
 describe("runtimePath", () => {
   it("resolves the env value relative to the working directory", () => {
@@ -15,5 +15,18 @@ describe("runtimePath", () => {
   it("keeps absolute values and appends segments", () => {
     const abs = path.resolve("/srv/uploads");
     expect(runtimePath(abs, "./x", "job-1")).toBe(path.join(abs, "job-1"));
+  });
+});
+
+describe("storedFilePath", () => {
+  // the handbook paths in the database were recorded on Windows
+  const expected = path.resolve("source-files", "חוברת ורודה ערבית.pdf");
+
+  it("resolves a Windows-style stored path on any OS", () => {
+    expect(storedFilePath("source-files\\חוברת ורודה ערבית.pdf")).toBe(expected);
+  });
+
+  it("resolves a POSIX-style stored path the same way", () => {
+    expect(storedFilePath("source-files/חוברת ורודה ערבית.pdf")).toBe(expected);
   });
 });

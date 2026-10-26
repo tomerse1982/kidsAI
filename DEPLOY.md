@@ -2,16 +2,16 @@
 
 **Shareable link: https://kidsai.purplecliff-668e4cb5.westeurope.azurecontainerapps.io**
 
-Only people you add can open it: visitors sign in with Microsoft and must be assigned to the
-site (see [Access](#add-or-remove-a-persons-access)). Search engines are told not to index it
-(`robots.txt`, `<meta name="robots">`, `X-Robots-Tag`).
+**The site is public**: anyone with the link can use it, without signing in. Search engines are
+still told not to index it (`robots.txt`, `<meta name="robots">`, `X-Robots-Tag`). Microsoft
+sign-in is configured but switched off; see [Access](#add-or-remove-a-persons-access) to turn it back on.
 
 | Part | Where | Notes |
 | --- | --- | --- |
 | App | Azure Container Apps `kidsai` in resource group `kidsai-rg` (West Europe), subscription *Azure subscription 1* | 1 vCPU / 2 GiB, scales to zero, max 1 replica |
 | Image | `ghcr.io/tomerse1982/kidsai:<commit sha>` | built by GitHub Actions from the root `Dockerfile` |
 | Database | Neon, project `royal-rice-30080112`, branch `production` (Frankfurt) | migrations run at container start |
-| Sign-in | Microsoft Entra ID app `kidsai-web` (directory linkcaring.com), "assignment required" | Container Apps built-in authentication |
+| Sign-in (off) | Microsoft Entra ID app `kidsai-web` (directory linkcaring.com), "assignment required" | Container Apps built-in authentication, currently disabled |
 
 ## Deploy an update
 
@@ -42,6 +42,12 @@ form (owner and repository IDs); a credential with the plain `repo:tomerse1982/k
 fails with `AADSTS700213`. Renaming or recreating the repository changes the IDs.
 
 ## Add or remove a person's access
+
+The site is currently public. To restrict it again to the people assigned below:
+
+```sh
+az containerapp auth update -n kidsai -g kidsai-rg --enabled true   # --enabled false makes it public again
+```
 
 Requires the Azure CLI signed in to the linkcaring.com directory (`az login`).
 

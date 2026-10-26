@@ -35,7 +35,11 @@ GitHub → *Settings → Secrets and variables → Actions*:
 | Variable (optional) | `AZURE_CONTAINER_APP` | defaults to `kidsai` |
 
 Without the secrets the image is still built, but the app is not updated (the run shows a warning).
-The deploy identity can only act on the `kidsai-rg` resource group, and only workflows on `main` can use it.
+The deploy identity can only act on the `kidsai-rg` resource group, and only workflows on `main` can use it:
+its federated credential (Entra app `kidsai-github-deploy`) trusts exactly the subject
+`repo:tomerse1982@209470757/kidsAI@1428599179:ref:refs/heads/main`. GitHub sends this immutable
+form (owner and repository IDs); a credential with the plain `repo:tomerse1982/kidsAI:...` subject
+fails with `AADSTS700213`. Renaming or recreating the repository changes the IDs.
 
 ## Add or remove a person's access
 
